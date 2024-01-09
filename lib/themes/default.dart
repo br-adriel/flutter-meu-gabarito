@@ -12,4 +12,5 @@ ThemeData defaultTheme = ThemeData(
     selectionHandleColor: primary,
   ),
   filledButtonTheme: FilledButtonThemeData(style: filledButtonStyle),
+  outlinedButtonTheme: OutlinedButtonThemeData(style: outlineButtonStyle),
 );

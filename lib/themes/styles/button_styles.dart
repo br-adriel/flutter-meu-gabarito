@@ -13,3 +13,17 @@ ButtonStyle filledButtonStyle = const ButtonStyle(
     EdgeInsets.symmetric(horizontal: 16, vertical: 12),
   ),
 );
+
+ButtonStyle outlineButtonStyle = const ButtonStyle(
+  side: MaterialStatePropertyAll(BorderSide(color: primary)),
+  backgroundColor: MaterialStatePropertyAll(Colors.transparent),
+  foregroundColor: MaterialStatePropertyAll(primary),
+  shape: MaterialStatePropertyAll(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+    ),
+  ),
+  padding: MaterialStatePropertyAll(
+    EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+  ),
+);
