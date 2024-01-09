@@ -13,4 +13,5 @@ ThemeData defaultTheme = ThemeData(
   ),
   filledButtonTheme: FilledButtonThemeData(style: filledButtonStyle),
   outlinedButtonTheme: OutlinedButtonThemeData(style: outlineButtonStyle),
+  textButtonTheme: TextButtonThemeData(style: textButtonStyle),
 );

@@ -28,3 +28,19 @@ ButtonStyle outlineButtonStyle = ButtonStyle(
     EdgeInsets.symmetric(horizontal: 16, vertical: 12),
   ),
 );
+
+ButtonStyle textButtonStyle = ButtonStyle(
+  foregroundColor: const MaterialStatePropertyAll(primary),
+  overlayColor: MaterialStatePropertyAll(primary[50]),
+  shape: MaterialStatePropertyAll(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(4),
+    ),
+  ),
+);
+
+ButtonStyle linkButtonStyle = textButtonStyle.copyWith(
+  padding: const MaterialStatePropertyAll(EdgeInsets.all(2)),
+  minimumSize: const MaterialStatePropertyAll(Size.zero),
+  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+);
