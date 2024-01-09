@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meu_gabarito/screens/auth/widgets/auth_card.dart';
 import 'package:meu_gabarito/screens/auth/widgets/show_password_icon_button.dart';
+import 'package:meu_gabarito/themes/styles/button_styles.dart';
 import 'package:meu_gabarito/themes/styles/text_styles.dart';
 import 'package:meu_gabarito/themes/styles/textfield_styles.dart';
 
@@ -52,11 +53,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   textInputAction: TextInputAction.go,
                   obscureText: !_showPassword,
                 ),
-                const SizedBox(height: 8),
-                FilledButton(
+                const SizedBox(height: 2),
+                TextButton(
                   onPressed: () {},
-                  child: const Text("Entrar"),
-                )
+                  style: linkButtonStyle,
+                  child: const Text("Esqueci a senha"),
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    FilledButton(
+                      onPressed: () {},
+                      child: const Text("Entrar"),
+                    ),
+                    const SizedBox(width: 8),
+                    OutlinedButton(
+                      onPressed: () {},
+                      child: const Text("Criar conta"),
+                    )
+                  ],
+                ),
               ],
             ),
           ),
