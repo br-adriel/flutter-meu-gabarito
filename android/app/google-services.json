@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "582089695762",
+    "project_id": "meu-gabarito",
+    "storage_bucket": "meu-gabarito.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582089695762:android:cd148a4c6d4b4deb51eecb",
+        "android_client_info": {
+          "package_name": "com.example.meu_gabarito"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtnV69m3U1HNAMI6WevwU8dXDbC3wNzOE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
