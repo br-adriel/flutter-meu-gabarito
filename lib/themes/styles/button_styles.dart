@@ -14,16 +14,17 @@ ButtonStyle filledButtonStyle = const ButtonStyle(
   ),
 );
 
-ButtonStyle outlineButtonStyle = const ButtonStyle(
-  side: MaterialStatePropertyAll(BorderSide(color: primary)),
-  backgroundColor: MaterialStatePropertyAll(Colors.transparent),
-  foregroundColor: MaterialStatePropertyAll(primary),
-  shape: MaterialStatePropertyAll(
+ButtonStyle outlineButtonStyle = ButtonStyle(
+  side: const MaterialStatePropertyAll(BorderSide(color: primary)),
+  backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
+  foregroundColor: const MaterialStatePropertyAll(primary),
+  overlayColor: MaterialStatePropertyAll(primary[50]),
+  shape: const MaterialStatePropertyAll(
     RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(8)),
     ),
   ),
-  padding: MaterialStatePropertyAll(
+  padding: const MaterialStatePropertyAll(
     EdgeInsets.symmetric(horizontal: 16, vertical: 12),
   ),
 );
