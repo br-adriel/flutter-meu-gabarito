@@ -18,6 +18,7 @@ class ShowPasswordIconButton extends StatelessWidget {
             : Icons.visibility_off_outlined,
         color: primary,
       ),
+      tooltip: showPassword ? 'Ocultar senha' : 'Mostrar senha',
     );
   }
 }
