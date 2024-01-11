@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:meu_gabarito/firebase_options.dart';
 import 'package:meu_gabarito/screens/auth/login.dart';
+import 'package:meu_gabarito/screens/home.dart';
 import 'package:meu_gabarito/store/main.dart';
 import 'package:meu_gabarito/themes/index.dart' as themes;
 import 'package:provider/provider.dart';
@@ -30,7 +31,7 @@ class MainApp extends StatelessWidget {
         home: Observer(builder: (context) {
           var store = Provider.of<MainStore>(context);
           if (store.auth.user == null) return const LoginScreen();
-          return const Scaffold();
+          return const HomeScreen();
         }),
         theme: themes.defaultTheme,
       ),
