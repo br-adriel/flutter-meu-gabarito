@@ -12,7 +12,7 @@ abstract class AuthBase with Store {
   @readonly
   User? _user = FirebaseAuth.instance.currentUser;
 
-  @observable
+  @readonly
   ObservableList<String> _errors = ObservableList.of([]);
 
   @action
@@ -26,9 +26,11 @@ abstract class AuthBase with Store {
       );
       _user = credential.user;
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+      if (e.code == 'invalid-credential') {
         _errors.add('Email ou senha incorretos.');
       }
+    } catch (e) {
+      _errors.add('Um erro ocorreu ao tentar fazer login.');
     } finally {
       _isLoading = false;
     }

@@ -46,11 +46,13 @@ mixin _$Auth on AuthBase, Store {
 
   late final _$_errorsAtom = Atom(name: 'AuthBase._errors', context: context);
 
-  @override
-  ObservableList<String> get _errors {
+  ObservableList<String> get errors {
     _$_errorsAtom.reportRead();
     return super._errors;
   }
+
+  @override
+  ObservableList<String> get _errors => errors;
 
   @override
   set _errors(ObservableList<String> value) {
