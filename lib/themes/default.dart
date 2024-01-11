@@ -4,6 +4,7 @@ import 'package:meu_gabarito/themes/styles/colors.dart';
 import 'package:meu_gabarito/themes/styles/button_styles.dart';
 
 ThemeData defaultTheme = ThemeData(
+  colorScheme: ColorScheme.fromSeed(seedColor: primary),
   textTheme: GoogleFonts.exo2TextTheme(),
   primarySwatch: primary,
   textSelectionTheme: TextSelectionThemeData(
