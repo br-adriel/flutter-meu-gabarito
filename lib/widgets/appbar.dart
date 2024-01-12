@@ -18,6 +18,7 @@ class DefaultAppbar extends StatelessWidget implements PreferredSizeWidget {
     var auth = Provider.of<MainStore>(context).auth;
 
     return AppBar(
+      iconTheme: const IconThemeData(color: primary),
       title: const Text("meuGabarito"),
       titleTextStyle: appBarLogoTextStyle,
       centerTitle: centerTitle,
@@ -28,9 +29,7 @@ class DefaultAppbar extends StatelessWidget implements PreferredSizeWidget {
                 child: InkWell(
                   customBorder: const CircleBorder(),
                   onTap: () => Navigator.of(context).push(
-                    createRouteGoingUp(
-                      const ProfileScreen(),
-                    ),
+                    createRouteGoingUp(const ProfileScreen()),
                   ),
                   child: CircleAvatar(
                     backgroundColor: primary[200],
