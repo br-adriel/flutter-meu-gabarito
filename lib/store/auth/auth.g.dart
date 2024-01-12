@@ -77,6 +77,14 @@ mixin _$Auth on AuthBase, Store {
     return _$logoutAsyncAction.run(() => super.logout());
   }
 
+  late final _$resetPasswordAsyncAction =
+      AsyncAction('AuthBase.resetPassword', context: context);
+
+  @override
+  Future<void> resetPassword(String email) {
+    return _$resetPasswordAsyncAction.run(() => super.resetPassword(email));
+  }
+
   late final _$signupAsyncAction =
       AsyncAction('AuthBase.signup', context: context);
 

@@ -1,3 +1,4 @@
+import 'package:meu_gabarito/validators/email_validator.dart';
 import 'package:mobx/mobx.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -48,6 +49,22 @@ abstract class AuthBase with Store {
     } finally {
       _isLoading = false;
     }
+  }
+
+  @action
+  Future<void> resetPassword(String email) async {
+    _errors.clear();
+    if (email.isEmpty || validateEmail(email) is String) {
+      _errors.add("Insira um email válido");
+      return;
+    }
+    _isLoading = true;
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      _errors.add("Um erro ocorreu.");
+    }
+    _isLoading = false;
   }
 
   @action

@@ -53,6 +53,20 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     }
 
+    void resetPassword() async {
+      await auth.resetPassword(_emailController.text).then((_) {
+        if (auth.errors.isEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                "Um email de redefinição de senha foi enviado para o endereço de email da sua conta.",
+              ),
+            ),
+          );
+        }
+      });
+    }
+
     return AuthCard(
       image: "assets/img/study-girl-book.jpg",
       child: Observer(
@@ -138,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 2),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: resetPassword,
                           style: linkButtonStyle,
                           child: const Text("Esqueci a senha"),
                         ),
