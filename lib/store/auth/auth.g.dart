@@ -109,6 +109,15 @@ mixin _$Auth on AuthBase, Store {
     return _$updateNameAsyncAction.run(() => super.updateName(displayName));
   }
 
+  late final _$updateEmailAsyncAction =
+      AsyncAction('AuthBase.updateEmail', context: context);
+
+  @override
+  Future<void> updateEmail(String email, String currentPassword) {
+    return _$updateEmailAsyncAction
+        .run(() => super.updateEmail(email, currentPassword));
+  }
+
   @override
   String toString() {
     return '''
