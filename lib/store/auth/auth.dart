@@ -109,4 +109,22 @@ abstract class AuthBase with Store {
       _isLoading = false;
     }
   }
+
+  @action
+  Future<void> updateName(String displayName) async {
+    _errors.clear();
+    _isLoading = true;
+
+    try {
+      if (_user != null) {
+        _errors.add("Nenhum usuário autenticado");
+      } else {
+        await _user?.updateDisplayName(displayName);
+      }
+    } catch (e) {
+      _errors.add('Um erro ocorreu ao tentar atualizar o nome de perfil.');
+    } finally {
+      _isLoading = false;
+    }
+  }
 }

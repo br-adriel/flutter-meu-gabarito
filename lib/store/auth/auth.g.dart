@@ -101,6 +101,14 @@ mixin _$Auth on AuthBase, Store {
     return _$updatePhotoAsyncAction.run(() => super.updatePhoto(photoUrl));
   }
 
+  late final _$updateNameAsyncAction =
+      AsyncAction('AuthBase.updateName', context: context);
+
+  @override
+  Future<void> updateName(String displayName) {
+    return _$updateNameAsyncAction.run(() => super.updateName(displayName));
+  }
+
   @override
   String toString() {
     return '''
