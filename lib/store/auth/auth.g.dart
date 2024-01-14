@@ -118,6 +118,15 @@ mixin _$Auth on AuthBase, Store {
         .run(() => super.updateEmail(email, currentPassword));
   }
 
+  late final _$updatePasswordAsyncAction =
+      AsyncAction('AuthBase.updatePassword', context: context);
+
+  @override
+  Future<void> updatePassword(String newPassword, String currentPassword) {
+    return _$updatePasswordAsyncAction
+        .run(() => super.updatePassword(newPassword, currentPassword));
+  }
+
   @override
   String toString() {
     return '''

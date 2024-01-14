@@ -150,4 +150,28 @@ abstract class AuthBase with Store {
       _isLoading = false;
     }
   }
+
+  @action
+  Future<void> updatePassword(
+      String newPassword, String currentPassword) async {
+    _errors.clear();
+    _isLoading = true;
+
+    try {
+      if (_user != null) {
+        _errors.add("Nenhum usuário autenticado");
+      } else {
+        AuthCredential credential = EmailAuthProvider.credential(
+          email: _user!.email!,
+          password: currentPassword,
+        );
+        await _user!.reauthenticateWithCredential(credential);
+        await _user!.updatePassword(newPassword);
+      }
+    } catch (e) {
+      _errors.add('Um erro ocorreu ao tentar atualizar a senha.');
+    } finally {
+      _isLoading = false;
+    }
+  }
 }
