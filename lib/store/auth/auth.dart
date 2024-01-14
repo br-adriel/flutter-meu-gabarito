@@ -1,6 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meu_gabarito/validators/email_validator.dart';
 import 'package:mobx/mobx.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 part 'auth.g.dart';
 
@@ -87,6 +87,24 @@ abstract class AuthBase with Store {
       }
     } catch (e) {
       _errors.add('Um erro ocorreu ao tentar criar a conta.');
+    } finally {
+      _isLoading = false;
+    }
+  }
+
+  @action
+  Future<void> updatePhoto(String photoUrl) async {
+    _errors.clear();
+    _isLoading = true;
+
+    try {
+      if (_user != null) {
+        _errors.add("Nenhum usuário autenticado");
+      } else {
+        await _user?.updatePhotoURL(photoUrl);
+      }
+    } catch (e) {
+      _errors.add('Um erro ocorreu ao tentar atualizar a imagem de perfil.');
     } finally {
       _isLoading = false;
     }
