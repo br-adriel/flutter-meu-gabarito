@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meu_gabarito/screens/profile.dart';
+import 'package:meu_gabarito/screens/profile/main.dart';
 import 'package:meu_gabarito/themes/styles/colors.dart';
 import 'package:meu_gabarito/utils/route.dart';
 import 'package:meu_gabarito/widgets/user_profile_image.dart';
