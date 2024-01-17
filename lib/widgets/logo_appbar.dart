@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:meu_gabarito/screens/profile.dart';
-import 'package:meu_gabarito/store/main.dart';
 import 'package:meu_gabarito/themes/styles/colors.dart';
 import 'package:meu_gabarito/utils/route.dart';
-import 'package:provider/provider.dart';
+import 'package:meu_gabarito/widgets/user_profile_image.dart';
 
 class LogoAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showUser;
@@ -17,8 +16,6 @@ class LogoAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    var auth = Provider.of<MainStore>(context).auth;
-
     return AppBar(
       iconTheme: const IconThemeData(color: primary),
       title: const Text("meuGabarito"),
@@ -34,19 +31,10 @@ class LogoAppBar extends StatelessWidget implements PreferredSizeWidget {
                     onTap: () => Navigator.of(context).push(
                       routeSlideLeft(const ProfileScreen()),
                     ),
-                    child: CircleAvatar(
-                      backgroundColor: primary[200],
-                      foregroundColor: primary[50],
-                      backgroundImage: auth.user!.photoURL != null
-                          ? NetworkImage(auth.user!.photoURL!)
-                          : null,
-                      child: auth.user!.photoURL == null
-                          ? const Icon(Icons.person_rounded)
-                          : null,
-                    ),
+                    child: const UserProfileImage(),
                   ),
                 ),
-              )
+              ),
             ]
           : null,
     );
