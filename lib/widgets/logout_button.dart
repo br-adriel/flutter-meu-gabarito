@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meu_gabarito/screens/auth/login.dart';
 import 'package:meu_gabarito/store/auth/auth.dart';
 import 'package:meu_gabarito/store/main.dart';
+import 'package:meu_gabarito/themes/styles/button_styles.dart';
 import 'package:provider/provider.dart';
 
 class LogoutButton extends StatelessWidget {
@@ -36,14 +37,16 @@ class LogoutButton extends StatelessWidget {
           );
         },
       ),
-      style: ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll(Colors.red[50]),
+      style: textButtonStyle.copyWith(
+        foregroundColor: const MaterialStatePropertyAll(Colors.red),
+        overlayColor: MaterialStatePropertyAll(Colors.red[50]),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
       child: const Align(
         alignment: Alignment.centerLeft,
         child: Text(
           'Sair',
-          style: TextStyle(color: Colors.red),
+          style: TextStyle(fontSize: 16),
         ),
       ),
     );
