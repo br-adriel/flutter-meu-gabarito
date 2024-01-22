@@ -120,6 +120,7 @@ abstract class AuthBase with Store {
         _errors.add("Nenhum usuário autenticado");
       } else {
         await _user?.updateDisplayName(displayName);
+        _user = FirebaseAuth.instance.currentUser;
       }
     } catch (e) {
       _errors.add('Um erro ocorreu ao tentar atualizar o nome de perfil.');
