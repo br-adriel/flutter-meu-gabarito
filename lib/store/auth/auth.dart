@@ -98,7 +98,7 @@ abstract class AuthBase with Store {
     _isLoading = true;
 
     try {
-      if (_user != null) {
+      if (_user == null) {
         _errors.add("Nenhum usuário autenticado");
       } else {
         await _user?.updatePhotoURL(photoUrl);
@@ -116,7 +116,7 @@ abstract class AuthBase with Store {
     _isLoading = true;
 
     try {
-      if (_user != null) {
+      if (_user == null) {
         _errors.add("Nenhum usuário autenticado");
       } else {
         await _user?.updateDisplayName(displayName);
@@ -158,7 +158,7 @@ abstract class AuthBase with Store {
     _isLoading = true;
 
     try {
-      if (_user != null) {
+      if (_user == null) {
         _errors.add("Nenhum usuário autenticado");
       } else {
         AuthCredential credential = EmailAuthProvider.credential(
