@@ -1,6 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:meu_gabarito/store/auth/auth.dart';
 import 'package:meu_gabarito/store/main.dart';
 import 'package:meu_gabarito/widgets/user_profile_image.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +10,7 @@ class UserInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    User? user = Provider.of<MainStore>(context).auth.user;
+    Auth auth = Provider.of<MainStore>(context).auth;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -25,10 +25,10 @@ class UserInfo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  user?.displayName ?? '',
+                  auth.user?.displayName ?? '',
                   style: const TextStyle(fontSize: 20),
                 ),
-                Text(user?.email ?? ''),
+                Text(auth.user?.email ?? ''),
               ],
             ),
           ),
