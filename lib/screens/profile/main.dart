@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meu_gabarito/screens/profile/widgets/update_user_name_bottom_sheet.dart';
 import 'package:meu_gabarito/screens/profile/widgets/user_info.dart';
 import 'package:meu_gabarito/store/auth/auth.dart';
 import 'package:meu_gabarito/store/main.dart';
@@ -23,7 +24,11 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   const UserInfo(),
                   LeftAlignTextButton(
-                    onPressed: () {},
+                    onPressed: () => showModalBottomSheet<dynamic>(
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (context) => const UpdateUserNameBottomSheet(),
+                    ),
                     text: "Alterar nome",
                   ),
                   LeftAlignTextButton(
