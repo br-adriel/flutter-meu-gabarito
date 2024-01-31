@@ -102,6 +102,7 @@ abstract class AuthBase with Store {
         _errors.add("Nenhum usuário autenticado");
       } else {
         await _user?.updatePhotoURL(photoUrl);
+        _user = FirebaseAuth.instance.currentUser;
       }
     } catch (e) {
       _errors.add('Um erro ocorreu ao tentar atualizar a imagem de perfil.');
