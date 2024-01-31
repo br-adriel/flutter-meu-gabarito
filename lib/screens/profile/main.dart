@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meu_gabarito/screens/profile/widgets/update_profile_image_bottom_sheet.dart';
 import 'package:meu_gabarito/screens/profile/widgets/update_user_name_bottom_sheet.dart';
 import 'package:meu_gabarito/screens/profile/widgets/user_info.dart';
 import 'package:meu_gabarito/store/auth/auth.dart';
@@ -32,7 +33,11 @@ class ProfileScreen extends StatelessWidget {
                     text: "Alterar nome",
                   ),
                   LeftAlignTextButton(
-                    onPressed: () {},
+                    onPressed: () => showModalBottomSheet(
+                      context: context,
+                      builder: (context) =>
+                          const UpdateProfileImageBottomSheet(),
+                    ),
                     text: "Atualizar imagem de perfil",
                   ),
                   LeftAlignTextButton(
