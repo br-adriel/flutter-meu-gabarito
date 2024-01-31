@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meu_gabarito/themes/styles/colors.dart';
 import 'package:meu_gabarito/themes/styles/button_styles.dart';
+import 'package:meu_gabarito/themes/styles/list_tile.dart';
 
 ThemeData defaultTheme = ThemeData(
   colorScheme: ColorScheme.fromSeed(seedColor: primary),
@@ -15,4 +16,5 @@ ThemeData defaultTheme = ThemeData(
   filledButtonTheme: FilledButtonThemeData(style: filledButtonStyle),
   outlinedButtonTheme: OutlinedButtonThemeData(style: outlineButtonStyle),
   textButtonTheme: TextButtonThemeData(style: textButtonStyle),
+  listTileTheme: roundedListTile,
 );
