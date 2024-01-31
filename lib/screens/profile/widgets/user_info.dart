@@ -14,25 +14,27 @@ class UserInfo extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const UserProfileImage(radius: 32),
-          const SizedBox(width: 8),
-          Observer(
-            builder: (context) => Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  auth.user?.displayName ?? '',
-                  style: const TextStyle(fontSize: 20),
-                ),
-                Text(auth.user?.email ?? ''),
-              ],
-            ),
-          ),
-        ],
+      child: Observer(
+        builder: (context) => auth.isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const UserProfileImage(radius: 32),
+                  const SizedBox(width: 8),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        auth.user?.displayName ?? '',
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                      Text(auth.user?.email ?? ''),
+                    ],
+                  ),
+                ],
+              ),
       ),
     );
   }
