@@ -138,13 +138,20 @@ abstract class AuthBase with Store {
     try {
       if (_user == null) {
         _errors.add("Nenhum usuário autenticado");
+      } else if (email.trim().isEmpty || currentPassword.isEmpty) {
+        _errors.add('Preencha os campos de email e senha');
       } else {
         AuthCredential credential = EmailAuthProvider.credential(
           email: _user!.email!,
           password: currentPassword,
         );
         await _user!.reauthenticateWithCredential(credential);
-        await _user!.updateEmail(email);
+        await FirebaseAuth.instance.setLanguageCode("pt");
+        await _user!.verifyBeforeUpdateEmail(email);
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-credential') {
+        _errors.add('Senha incorreta.');
       }
     } catch (e) {
       _errors.add('Um erro ocorreu ao tentar atualizar o email.');
