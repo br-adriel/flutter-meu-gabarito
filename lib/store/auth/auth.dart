@@ -162,13 +162,16 @@ abstract class AuthBase with Store {
 
   @action
   Future<void> updatePassword(
-      String newPassword, String currentPassword) async {
+    String newPassword,
+    String currentPassword,
+  ) async {
     _errors.clear();
     _isLoading = true;
 
     try {
       if (_user == null) {
         _errors.add("Nenhum usuário autenticado");
+        throw Error();
       } else {
         AuthCredential credential = EmailAuthProvider.credential(
           email: _user!.email!,
@@ -177,8 +180,18 @@ abstract class AuthBase with Store {
         await _user!.reauthenticateWithCredential(credential);
         await _user!.updatePassword(newPassword);
       }
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'invalid-credential':
+          _errors.add('Senha incorreta');
+          break;
+        default:
+          _errors.add('Um erro ocorreu ao tentar atualizar a senha.');
+      }
+      rethrow;
     } catch (e) {
       _errors.add('Um erro ocorreu ao tentar atualizar a senha.');
+      rethrow;
     } finally {
       _isLoading = false;
     }
