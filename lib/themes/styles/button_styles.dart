@@ -44,3 +44,13 @@ ButtonStyle linkButtonStyle = textButtonStyle.copyWith(
   minimumSize: const MaterialStatePropertyAll(Size.zero),
   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
 );
+
+const floatingButtonThemeData = FloatingActionButtonThemeData(
+  backgroundColor: (primary),
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(8),
+    ),
+  ),
+  foregroundColor: (Colors.white),
+);
