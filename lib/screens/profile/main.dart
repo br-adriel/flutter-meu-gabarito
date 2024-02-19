@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meu_gabarito/screens/profile/widgets/upate_email_bottom_sheet.dart';
+import 'package:meu_gabarito/screens/profile/widgets/update_password_bottom_sheet.dart';
 import 'package:meu_gabarito/screens/profile/widgets/update_profile_image_bottom_sheet.dart';
 import 'package:meu_gabarito/screens/profile/widgets/update_user_name_bottom_sheet.dart';
 import 'package:meu_gabarito/screens/profile/widgets/user_info.dart';
@@ -48,7 +49,13 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     text: "Atualizar email",
                   ),
-                  LeftAlignTextButton(onPressed: () {}, text: "Alterar senha"),
+                  LeftAlignTextButton(
+                      onPressed: () => showModalBottomSheet(
+                            context: context,
+                            builder: (context) =>
+                                const UpdatePasswordBottomSheet(),
+                          ),
+                      text: "Alterar senha"),
                   const LogoutButton(),
                 ],
               ),
