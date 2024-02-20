@@ -7,9 +7,10 @@ class NewTestTemplateFloatingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+      onPressed: () => showModalBottomSheet(
+        context: context,
         builder: (context) => const CreateTestTemplateScreen(),
-      )),
+      ),
       tooltip: "Novo gabarito",
       child: const Icon(Icons.add),
     );
