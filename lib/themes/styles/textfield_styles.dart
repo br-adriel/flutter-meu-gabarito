@@ -14,47 +14,21 @@ InputDecoration textFieldInputDecoration(
   );
 }
 
+const roundedNoBorderInput = UnderlineInputBorder(
+  borderRadius: BorderRadius.all(Radius.circular(8)),
+  borderSide: BorderSide(
+    color: Colors.transparent,
+    width: 0,
+    style: BorderStyle.none,
+  ),
+);
+
 var inputDecorationTheme = InputDecorationTheme(
-  border: const UnderlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(8)),
-    borderSide: BorderSide(
-      color: Colors.transparent,
-      width: 0,
-      style: BorderStyle.none,
-    ),
-  ),
-  enabledBorder: const UnderlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(8)),
-    borderSide: BorderSide(
-      color: Colors.transparent,
-      width: 0,
-      style: BorderStyle.none,
-    ),
-  ),
-  errorBorder: const UnderlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(8)),
-    borderSide: BorderSide(
-      color: Colors.transparent,
-      width: 0,
-      style: BorderStyle.none,
-    ),
-  ),
-  focusedBorder: const UnderlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(8)),
-    borderSide: BorderSide(
-      color: Colors.transparent,
-      width: 0,
-      style: BorderStyle.none,
-    ),
-  ),
-  disabledBorder: const UnderlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(8)),
-    borderSide: BorderSide(
-      color: Colors.transparent,
-      width: 0,
-      style: BorderStyle.none,
-    ),
-  ),
+  border: roundedNoBorderInput,
+  enabledBorder: roundedNoBorderInput,
+  errorBorder: roundedNoBorderInput,
+  focusedBorder: roundedNoBorderInput,
+  disabledBorder: roundedNoBorderInput,
   contentPadding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
   labelStyle: const TextStyle(color: primary),
   filled: true,
