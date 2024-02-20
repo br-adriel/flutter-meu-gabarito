@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meu_gabarito/themes/styles/button_styles.dart';
 import 'package:meu_gabarito/themes/styles/colors.dart';
-import 'package:meu_gabarito/themes/styles/list_tile.dart';
+import 'package:meu_gabarito/themes/styles/list_tile_styles.dart';
 import 'package:meu_gabarito/themes/styles/textfield_styles.dart';
 
 ThemeData defaultTheme = ThemeData(
