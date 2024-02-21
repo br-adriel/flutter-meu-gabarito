@@ -1,5 +1,5 @@
-import 'package:meu_gabarito/validators/email_validator.dart';
-import 'package:meu_gabarito/validators/length_validator.dart';
+import 'package:meu_gabarito/validators/email.dart';
+import 'package:meu_gabarito/validators/length.dart';
 import 'package:meu_gabarito/validators/required.dart';
 
 String? validatePasswordField(String? value) {

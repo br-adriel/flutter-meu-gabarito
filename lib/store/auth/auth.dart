@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:meu_gabarito/validators/email_validator.dart';
+import 'package:meu_gabarito/validators/email.dart';
 import 'package:mobx/mobx.dart';
 
 part 'auth.g.dart';
