@@ -1,17 +1,39 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meu_gabarito/enums/alternativa.dart';
 
 class Questao {
-  String id;
-  int numero;
-  Alternativa alternativaSelecionada;
+  int? numero;
+  Alternativa? alternativaSelecionada;
   Alternativa? alternativaCorreta;
-  bool corrigida;
+  bool? corrigida;
 
   Questao({
-    required this.id,
     required this.alternativaSelecionada,
     required this.corrigida,
     required this.numero,
-    this.alternativaCorreta,
+    required this.alternativaCorreta,
   });
+
+  factory Questao.fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) {
+    final data = snapshot.data();
+    return Questao(
+      alternativaSelecionada: data?['alternativaSelecionada'],
+      corrigida: data?['corrigida'],
+      numero: data?['numero'],
+      alternativaCorreta: data?['alternativaCorreta'],
+    );
+  }
+
+  Map<String, dynamic> toFirestore() {
+    return {
+      if (alternativaCorreta != null) 'alternativaCorreta': alternativaCorreta,
+      if (alternativaSelecionada != null)
+        'alternativaSelecionada': alternativaSelecionada,
+      if (corrigida != null) 'corrigida': corrigida,
+      if (numero != null) 'numero': numero,
+    };
+  }
 }
