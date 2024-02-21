@@ -14,7 +14,7 @@ class CreateGabaritoScreen extends StatefulWidget {
 class _CreateGabaritoScreenState extends State<CreateGabaritoScreen> {
   var nameTC = TextEditingController();
   var sizeTC = TextEditingController();
-  var startTC = TextEditingController();
+  var startTC = TextEditingController(text: '1');
 
   @override
   Widget build(BuildContext context) {
