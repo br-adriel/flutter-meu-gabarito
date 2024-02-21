@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:meu_gabarito/themes/styles/text_styles.dart';
 import 'package:meu_gabarito/themes/styles/textfield_styles.dart';
+import 'package:meu_gabarito/validators/gabarito.dart';
+import 'package:meu_gabarito/validators/required.dart';
 
 class CreateGabaritoScreen extends StatefulWidget {
   const CreateGabaritoScreen({super.key});
@@ -39,6 +41,7 @@ class _CreateGabaritoScreenState extends State<CreateGabaritoScreen> {
                     controller: nameTC,
                     decoration: textFieldInputDecoration('Nome'),
                     textInputAction: TextInputAction.next,
+                    validator: validateRequired,
                   ),
                   const SizedBox(height: 8),
                   TextFormField(
@@ -47,6 +50,7 @@ class _CreateGabaritoScreenState extends State<CreateGabaritoScreen> {
                         textFieldInputDecoration('Quantidade de questões'),
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.next,
+                    validator: validateSize,
                   ),
                   const SizedBox(height: 8),
                   TextFormField(
@@ -57,6 +61,7 @@ class _CreateGabaritoScreenState extends State<CreateGabaritoScreen> {
                     ),
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.done,
+                    validator: validateIndex,
                   ),
                   const SizedBox(height: 8),
                   FilledButton(
