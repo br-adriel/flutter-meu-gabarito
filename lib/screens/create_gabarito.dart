@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:meu_gabarito/themes/styles/text_styles.dart';
 import 'package:meu_gabarito/themes/styles/textfield_styles.dart';
 
-class CreateTestTemplateScreen extends StatefulWidget {
-  const CreateTestTemplateScreen({super.key});
+class CreateGabaritoScreen extends StatefulWidget {
+  const CreateGabaritoScreen({super.key});
 
   @override
-  State<CreateTestTemplateScreen> createState() =>
-      _CreateTestTemplateScreenState();
+  State<CreateGabaritoScreen> createState() => _CreateGabaritoScreenState();
 }
 
-class _CreateTestTemplateScreenState extends State<CreateTestTemplateScreen> {
+class _CreateGabaritoScreenState extends State<CreateGabaritoScreen> {
   var nameTC = TextEditingController();
   var sizeTC = TextEditingController();
   var startTC = TextEditingController();
