@@ -45,6 +45,24 @@ mixin _$Gabaritos on GabaritosBase, Store {
     });
   }
 
+  late final _$_errorsAtom =
+      Atom(name: 'GabaritosBase._errors', context: context);
+
+  ObservableList<String> get errors {
+    _$_errorsAtom.reportRead();
+    return super._errors;
+  }
+
+  @override
+  ObservableList<String> get _errors => errors;
+
+  @override
+  set _errors(ObservableList<String> value) {
+    _$_errorsAtom.reportWrite(value, super._errors, () {
+      super._errors = value;
+    });
+  }
+
   late final _$_questoesAtom =
       Atom(name: 'GabaritosBase._questoes', context: context);
 
@@ -61,6 +79,15 @@ mixin _$Gabaritos on GabaritosBase, Store {
     _$_questoesAtom.reportWrite(value, super._questoes, () {
       super._questoes = value;
     });
+  }
+
+  late final _$createGabaritoAsyncAction =
+      AsyncAction('GabaritosBase.createGabarito', context: context);
+
+  @override
+  Future<void> createGabarito(String nome, int tamanho, int indice) {
+    return _$createGabaritoAsyncAction
+        .run(() => super.createGabarito(nome, tamanho, indice));
   }
 
   @override
