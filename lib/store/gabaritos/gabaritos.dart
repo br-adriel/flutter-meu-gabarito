@@ -1,4 +1,5 @@
 import 'package:meu_gabarito/classes/gabarito.dart';
+import 'package:meu_gabarito/classes/questao.dart';
 import 'package:mobx/mobx.dart';
 
 part 'gabaritos.g.dart';
@@ -11,4 +12,7 @@ abstract class GabaritosBase with Store {
 
   @readonly
   ObservableList<Gabarito> _gabaritos = ObservableList.of([]);
+
+  @readonly
+  ObservableList<Questao> _questoes = ObservableList.of([]);
 }

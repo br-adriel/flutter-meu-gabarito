@@ -45,6 +45,24 @@ mixin _$Gabaritos on GabaritosBase, Store {
     });
   }
 
+  late final _$_questoesAtom =
+      Atom(name: 'GabaritosBase._questoes', context: context);
+
+  ObservableList<Questao> get questoes {
+    _$_questoesAtom.reportRead();
+    return super._questoes;
+  }
+
+  @override
+  ObservableList<Questao> get _questoes => questoes;
+
+  @override
+  set _questoes(ObservableList<Questao> value) {
+    _$_questoesAtom.reportWrite(value, super._questoes, () {
+      super._questoes = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
