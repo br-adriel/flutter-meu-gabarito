@@ -7,3 +7,12 @@ String? validateSize(String? value) {
 
   return null;
 }
+
+String? validateIndex(String? value) {
+  if (value == null || value.isEmpty) return 'Preencha o campo';
+
+  int? parsedValue = int.tryParse(value);
+  if (parsedValue == null) return 'Preencha o campo com um número válido';
+
+  return null;
+}
