@@ -10,13 +10,13 @@ class Gabarito {
   DateTime? updatedAt;
 
   Gabarito({
-    required this.id,
     required this.nome,
     required this.tamanho,
     required this.contagemCorretas,
     required this.contagemCorrigidas,
     this.createdAt,
     this.updatedAt,
+    this.id,
   });
 
   double get porcentagemCorrigidas {
@@ -42,7 +42,7 @@ class Gabarito {
   ) {
     final data = snapshot.data();
     return Gabarito(
-      id: data?['id'],
+      id: snapshot.id,
       nome: data?['nome'],
       contagemCorretas: data?['contagemCorretas'],
       contagemCorrigidas: data?['contagemCorrigidas'],
@@ -54,7 +54,6 @@ class Gabarito {
 
   Map<String, dynamic> toFirestore() {
     return {
-      if (id != null) 'id': id,
       if (nome != null) 'nome': nome,
       if (contagemCorretas != null) 'contagemCorretas': contagemCorretas,
       if (contagemCorrigidas != null) 'contagemCorrigidas': contagemCorrigidas,
