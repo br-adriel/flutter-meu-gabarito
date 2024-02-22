@@ -90,6 +90,15 @@ mixin _$Gabaritos on GabaritosBase, Store {
         .run(() => super.createGabarito(nome, tamanho, indice));
   }
 
+  late final _$getGabaritosAsyncAction =
+      AsyncAction('GabaritosBase.getGabaritos', context: context);
+
+  @override
+  Future<void> getGabaritos({int? limit}) {
+    return _$getGabaritosAsyncAction
+        .run(() => super.getGabaritos(limit: limit));
+  }
+
   @override
   String toString() {
     return '''

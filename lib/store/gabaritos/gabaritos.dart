@@ -61,4 +61,34 @@ abstract class GabaritosBase with Store {
       _isLoading = false;
     }
   }
+
+  @action
+  Future<void> getGabaritos({int? limit}) async {
+    _isLoading = true;
+    _errors.clear();
+    _gabaritos.clear();
+    try {
+      var collectionRef = _db
+          .collection('users')
+          .doc(_auth.currentUser?.uid)
+          .collection('gabaritos')
+          .orderBy('updatedAt');
+
+      if (limit != null) collectionRef = collectionRef.limit(limit);
+
+      final docsSnap = await collectionRef
+          .withConverter(
+            fromFirestore: Gabarito.fromFirestore,
+            toFirestore: (Gabarito gabarito, _) => gabarito.toFirestore(),
+          )
+          .get();
+      final fecthedGabaritos = docsSnap.docs.map((doc) => doc.data());
+      _gabaritos.addAll(fecthedGabaritos);
+    } catch (e) {
+      _errors.add("Não foi possível recuperar os gabaritos");
+      rethrow;
+    } finally {
+      _isLoading = false;
+    }
+  }
 }
