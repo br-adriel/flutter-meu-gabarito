@@ -72,7 +72,7 @@ abstract class GabaritosBase with Store {
           .collection('users')
           .doc(_auth.currentUser?.uid)
           .collection('gabaritos')
-          .orderBy('updatedAt');
+          .orderBy('updatedAt', descending: true);
 
       if (limit != null) collectionRef = collectionRef.limit(limit);
 
