@@ -48,9 +48,9 @@ class Gabarito {
     return {
       if (id != null) 'id': id,
       if (nome != null) 'nome': nome,
-      if (contagemCorretas == null) 'contagemCorretas': contagemCorretas,
-      if (contagemCorrigidas == null) 'contagemCorrigidas': contagemCorrigidas,
-      if (tamanho == null) 'tamanho': tamanho,
+      if (contagemCorretas != null) 'contagemCorretas': contagemCorretas,
+      if (contagemCorrigidas != null) 'contagemCorrigidas': contagemCorrigidas,
+      if (tamanho != null) 'tamanho': tamanho,
     };
   }
 }
