@@ -19,14 +19,16 @@ class Gabarito {
     this.updatedAt,
   });
 
-  int get porcentagemCorrigidas {
-    if (contagemCorrigidas == null || tamanho == null) return 0;
-    return (contagemCorrigidas! ~/ tamanho!) * 100;
+  double get porcentagemCorrigidas {
+    if (contagemCorrigidas == null || tamanho == null || tamanho == 0) return 0;
+    return (contagemCorrigidas! ~/ tamanho!).toDouble();
   }
 
-  int get porcentagemCorretas {
-    if (contagemCorretas == null || contagemCorrigidas == null) return 0;
-    return contagemCorretas! ~/ contagemCorrigidas! * 100;
+  double get porcentagemCorretas {
+    if (contagemCorretas == null ||
+        contagemCorrigidas == null ||
+        contagemCorrigidas == 0) return 0;
+    return (contagemCorretas! ~/ contagemCorrigidas!).toDouble();
   }
 
   bool get corrigido {
