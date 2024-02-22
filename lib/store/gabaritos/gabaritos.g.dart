@@ -27,6 +27,24 @@ mixin _$Gabaritos on GabaritosBase, Store {
     });
   }
 
+  late final _$_isSavingAtom =
+      Atom(name: 'GabaritosBase._isSaving', context: context);
+
+  bool get isSaving {
+    _$_isSavingAtom.reportRead();
+    return super._isSaving;
+  }
+
+  @override
+  bool get _isSaving => isSaving;
+
+  @override
+  set _isSaving(bool value) {
+    _$_isSavingAtom.reportWrite(value, super._isSaving, () {
+      super._isSaving = value;
+    });
+  }
+
   late final _$_gabaritosAtom =
       Atom(name: 'GabaritosBase._gabaritos', context: context);
 

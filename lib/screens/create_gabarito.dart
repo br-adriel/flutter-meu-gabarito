@@ -59,7 +59,7 @@ class _CreateGabaritoScreenState extends State<CreateGabaritoScreen> {
           shrinkWrap: true,
           children: [
             Observer(
-              builder: (context) => gabaritos.isLoading
+              builder: (context) => gabaritos.isSaving
                   ? const Padding(
                       padding: EdgeInsets.symmetric(vertical: 20),
                       child: Center(child: CircularProgressIndicator()),

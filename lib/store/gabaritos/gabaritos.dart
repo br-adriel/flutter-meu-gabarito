@@ -16,6 +16,9 @@ abstract class GabaritosBase with Store {
   bool _isLoading = false;
 
   @readonly
+  bool _isSaving = false;
+
+  @readonly
   ObservableList<Gabarito> _gabaritos = ObservableList.of([]);
 
   @readonly
@@ -26,7 +29,7 @@ abstract class GabaritosBase with Store {
 
   @action
   Future<void> createGabarito(String nome, int tamanho, int indice) async {
-    _isLoading = true;
+    _isSaving = true;
     _errors.clear();
     try {
       var gabarito = Gabarito(
@@ -58,7 +61,7 @@ abstract class GabaritosBase with Store {
       _errors.add("Não foi possível criar o gabarito");
       rethrow;
     } finally {
-      _isLoading = false;
+      _isSaving = false;
     }
   }
 
