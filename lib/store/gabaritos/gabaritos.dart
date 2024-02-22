@@ -82,8 +82,8 @@ abstract class GabaritosBase with Store {
             toFirestore: (Gabarito gabarito, _) => gabarito.toFirestore(),
           )
           .get();
-      final fecthedGabaritos = docsSnap.docs.map((doc) => doc.data());
-      _gabaritos.addAll(fecthedGabaritos);
+      final fetchedGabaritos = docsSnap.docs.map((doc) => doc.data());
+      _gabaritos.addAll(fetchedGabaritos);
     } catch (e) {
       _errors.add("Não foi possível recuperar os gabaritos");
       rethrow;
