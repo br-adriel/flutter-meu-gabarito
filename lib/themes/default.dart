@@ -15,6 +15,11 @@ ThemeData defaultTheme = ThemeData(
     selectionColor: primary[100],
     selectionHandleColor: primary,
   ),
+  cardTheme: const CardTheme(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+    ),
+  ),
   filledButtonTheme: FilledButtonThemeData(style: filledButtonStyle),
   outlinedButtonTheme: OutlinedButtonThemeData(style: outlineButtonStyle),
   textButtonTheme: TextButtonThemeData(style: textButtonStyle),
