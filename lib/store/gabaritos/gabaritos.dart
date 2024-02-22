@@ -56,6 +56,7 @@ abstract class GabaritosBase with Store {
       }
     } catch (e) {
       _errors.add("Não foi possível criar o gabarito");
+      rethrow;
     } finally {
       _isLoading = false;
     }
