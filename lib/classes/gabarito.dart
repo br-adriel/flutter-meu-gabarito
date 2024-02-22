@@ -6,6 +6,8 @@ class Gabarito {
   int? contagemCorrigidas;
   int? contagemCorretas;
   int? tamanho;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
   Gabarito({
     required this.id,
@@ -13,6 +15,8 @@ class Gabarito {
     required this.tamanho,
     required this.contagemCorretas,
     required this.contagemCorrigidas,
+    this.createdAt,
+    this.updatedAt,
   });
 
   int get porcentagemCorrigidas {
@@ -41,6 +45,8 @@ class Gabarito {
       contagemCorretas: data?['contagemCorretas'],
       contagemCorrigidas: data?['contagemCorrigidas'],
       tamanho: data?['tamanho'],
+      createdAt: (data?['createdAt'] as Timestamp).toDate(),
+      updatedAt: (data?['updatedAt'] as Timestamp).toDate(),
     );
   }
 
@@ -51,6 +57,8 @@ class Gabarito {
       if (contagemCorretas != null) 'contagemCorretas': contagemCorretas,
       if (contagemCorrigidas != null) 'contagemCorrigidas': contagemCorrigidas,
       if (tamanho != null) 'tamanho': tamanho,
+      'createdAt': createdAt ?? FieldValue.serverTimestamp(),
+      'updatedAt': FieldValue.serverTimestamp(),
     };
   }
 }
