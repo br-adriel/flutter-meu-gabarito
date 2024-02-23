@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:meu_gabarito/screens/gabaritos.dart';
 import 'package:meu_gabarito/store/gabaritos/gabaritos.dart';
 import 'package:meu_gabarito/store/main.dart';
 import 'package:meu_gabarito/themes/styles/text_styles.dart';
@@ -34,7 +35,13 @@ class RecentGabaritos extends HookWidget {
             children: [
               Text('Gabaritos recentes', style: title2TextStyle),
               TextButton(
-                onPressed: () {},
+                onPressed: () => Navigator.of(context)
+                    .push(
+                      MaterialPageRoute(
+                        builder: (context) => GabaritosScreen(),
+                      ),
+                    )
+                    .then((value) => store.getRecentGabaritos()),
                 child: const Text(
                   'Ver todos',
                   style: TextStyle(fontSize: 16),
