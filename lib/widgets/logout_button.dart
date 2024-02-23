@@ -37,7 +37,7 @@ class LogoutButton extends StatelessWidget {
           );
         },
       ),
-      style: textButtonStyle.copyWith(
+      style: cardMenuButtonStyle.copyWith(
         foregroundColor: const MaterialStatePropertyAll(Colors.red),
         overlayColor: MaterialStatePropertyAll(Colors.red[50]),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
