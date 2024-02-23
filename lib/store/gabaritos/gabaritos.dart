@@ -66,7 +66,7 @@ abstract class GabaritosBase with Store {
   }
 
   @action
-  Future<void> getGabaritos({int? limit}) async {
+  Future<void> getRecentGabaritos({int? limit}) async {
     _isLoading = true;
     _errors.clear();
     _gabaritos.clear();

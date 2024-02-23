@@ -108,13 +108,13 @@ mixin _$Gabaritos on GabaritosBase, Store {
         .run(() => super.createGabarito(nome, tamanho, indice));
   }
 
-  late final _$getGabaritosAsyncAction =
-      AsyncAction('GabaritosBase.getGabaritos', context: context);
+  late final _$getRecentGabaritosAsyncAction =
+      AsyncAction('GabaritosBase.getRecentGabaritos', context: context);
 
   @override
-  Future<void> getGabaritos({int? limit}) {
-    return _$getGabaritosAsyncAction
-        .run(() => super.getGabaritos(limit: limit));
+  Future<void> getRecentGabaritos({int? limit}) {
+    return _$getRecentGabaritosAsyncAction
+        .run(() => super.getRecentGabaritos(limit: limit));
   }
 
   @override

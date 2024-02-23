@@ -37,7 +37,7 @@ class _CreateGabaritoScreenState extends State<CreateGabaritoScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Gabarito criado com sucesso')),
           );
-          gabaritos.getGabaritos();
+          gabaritos.getRecentGabaritos();
           Navigator.of(context).pop();
         }).catchError((_) {
           gabaritos.errors.map(

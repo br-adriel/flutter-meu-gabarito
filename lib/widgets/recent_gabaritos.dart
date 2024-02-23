@@ -19,7 +19,7 @@ class RecentGabaritos extends HookWidget {
     Gabaritos store = Provider.of<MainStore>(context).gabaritos;
 
     useEffect(() {
-      store.getGabaritos(limit: limit);
+      store.getRecentGabaritos(limit: limit);
       return () {};
     }, []);
 
