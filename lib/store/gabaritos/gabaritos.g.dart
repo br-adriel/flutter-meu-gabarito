@@ -9,6 +9,24 @@ part of 'gabaritos.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$Gabaritos on GabaritosBase, Store {
+  late final _$_loadedAllRecordsAtom =
+      Atom(name: 'GabaritosBase._loadedAllRecords', context: context);
+
+  bool get loadedAllRecords {
+    _$_loadedAllRecordsAtom.reportRead();
+    return super._loadedAllRecords;
+  }
+
+  @override
+  bool get _loadedAllRecords => loadedAllRecords;
+
+  @override
+  set _loadedAllRecords(bool value) {
+    _$_loadedAllRecordsAtom.reportWrite(value, super._loadedAllRecords, () {
+      super._loadedAllRecords = value;
+    });
+  }
+
   late final _$_isLoadingAtom =
       Atom(name: 'GabaritosBase._isLoading', context: context);
 
@@ -115,6 +133,15 @@ mixin _$Gabaritos on GabaritosBase, Store {
   Future<void> getRecentGabaritos({int? limit}) {
     return _$getRecentGabaritosAsyncAction
         .run(() => super.getRecentGabaritos(limit: limit));
+  }
+
+  late final _$getNextPageAsyncAction =
+      AsyncAction('GabaritosBase.getNextPage', context: context);
+
+  @override
+  Future<void> getNextPage({bool isFirstPage = false, int pageSize = 10}) {
+    return _$getNextPageAsyncAction.run(
+        () => super.getNextPage(isFirstPage: isFirstPage, pageSize: pageSize));
   }
 
   @override

@@ -9,8 +9,15 @@ part 'gabaritos.g.dart';
 class Gabaritos = GabaritosBase with _$Gabaritos;
 
 abstract class GabaritosBase with Store {
-  final _db = FirebaseFirestore.instance;
-  final _auth = FirebaseAuth.instance;
+  final _collectionRef = FirebaseFirestore.instance
+      .collection('users')
+      .doc(FirebaseAuth.instance.currentUser?.uid)
+      .collection('gabaritos');
+
+  DocumentSnapshot? _lastDoc;
+
+  @readonly
+  bool _loadedAllRecords = false;
 
   @readonly
   bool _isLoading = false;
@@ -47,11 +54,7 @@ abstract class GabaritosBase with Store {
         alternativaCorreta: null,
       );
 
-      var gabaritoRef = await _db
-          .collection('users')
-          .doc(_auth.currentUser?.uid)
-          .collection('gabaritos')
-          .add(gabarito.toFirestore());
+      var gabaritoRef = await _collectionRef.add(gabarito.toFirestore());
 
       for (int i = indice; i <= tamanho; i++) {
         questao.numero = i;
@@ -71,11 +74,7 @@ abstract class GabaritosBase with Store {
     _errors.clear();
     _gabaritos.clear();
     try {
-      var collectionRef = _db
-          .collection('users')
-          .doc(_auth.currentUser?.uid)
-          .collection('gabaritos')
-          .orderBy('updatedAt', descending: true);
+      var collectionRef = _collectionRef.orderBy('updatedAt', descending: true);
 
       if (limit != null) collectionRef = collectionRef.limit(limit);
 
@@ -87,6 +86,51 @@ abstract class GabaritosBase with Store {
           .get();
       final fetchedGabaritos = docsSnap.docs.map((doc) => doc.data());
       _gabaritos.addAll(fetchedGabaritos);
+    } catch (e) {
+      _errors.add("Não foi possível recuperar os gabaritos");
+      rethrow;
+    } finally {
+      _isLoading = false;
+    }
+  }
+
+  @action
+  Future<void> getNextPage({
+    bool isFirstPage = false,
+    int pageSize = 10,
+  }) async {
+    if (isFirstPage) {
+      _lastDoc = null;
+      _loadedAllRecords = false;
+    }
+    if (_loadedAllRecords) return;
+
+    _isLoading = true;
+    _errors.clear();
+    try {
+      if (_lastDoc == null) _gabaritos.clear();
+
+      var colRef =
+          _collectionRef.orderBy('updatedAt', descending: true).limit(pageSize);
+
+      if (_lastDoc != null) colRef = colRef.startAfterDocument(_lastDoc!);
+
+      final docsSnap = await colRef
+          .withConverter(
+            fromFirestore: Gabarito.fromFirestore,
+            toFirestore: (Gabarito g, _) => g.toFirestore(),
+          )
+          .get();
+
+      final fetchedGabaritos = docsSnap.docs.map((doc) => doc.data());
+
+      if (docsSnap.docs.isEmpty ||
+          _gabaritos.map((g) => g.id).contains(docsSnap.docs.last.id)) {
+        _loadedAllRecords = true;
+      } else {
+        _lastDoc = docsSnap.docs.last;
+        _gabaritos.addAll(fetchedGabaritos);
+      }
     } catch (e) {
       _errors.add("Não foi possível recuperar os gabaritos");
       rethrow;
