@@ -54,3 +54,14 @@ const floatingButtonThemeData = FloatingActionButtonThemeData(
   ),
   foregroundColor: (Colors.white),
 );
+
+const cardMenuButtonStyle = ButtonStyle(
+  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+  shape: MaterialStatePropertyAll(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(8),
+      ),
+    ),
+  ),
+);
