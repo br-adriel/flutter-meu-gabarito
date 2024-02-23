@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:meu_gabarito/screens/profile/widgets/upate_email_bottom_sheet.dart';
-import 'package:meu_gabarito/screens/profile/widgets/update_password_bottom_sheet.dart';
-import 'package:meu_gabarito/screens/profile/widgets/update_profile_image_bottom_sheet.dart';
-import 'package:meu_gabarito/screens/profile/widgets/update_user_name_bottom_sheet.dart';
+import 'package:meu_gabarito/screens/profile/widgets/authentication_menu_card.dart';
+import 'package:meu_gabarito/screens/profile/widgets/edit_profile_menu_card.dart';
 import 'package:meu_gabarito/screens/profile/widgets/user_info.dart';
 import 'package:meu_gabarito/store/auth/auth.dart';
 import 'package:meu_gabarito/store/main.dart';
-import 'package:meu_gabarito/widgets/left_align_text_button.dart';
-import 'package:meu_gabarito/widgets/logout_button.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -18,46 +14,34 @@ class ProfileScreen extends StatelessWidget {
     Auth auth = Provider.of<MainStore>(context).auth;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Seu perfil")),
+      appBar: AppBar(
+        title: const Text("Seu perfil"),
+        centerTitle: true,
+      ),
       body: auth.isLoading
           ? const Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const UserInfo(),
-                  LeftAlignTextButton(
-                    onPressed: () => showModalBottomSheet<dynamic>(
-                      isScrollControlled: true,
-                      context: context,
-                      builder: (context) => const UpdateUserNameBottomSheet(),
+          : const SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 0,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    UserInfo(),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
+                      child: Text('Editar perfil'),
                     ),
-                    text: "Alterar nome",
-                  ),
-                  LeftAlignTextButton(
-                    onPressed: () => showModalBottomSheet(
-                      context: context,
-                      builder: (context) =>
-                          const UpdateProfileImageBottomSheet(),
+                    EditProfileMenuCard(),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
+                      child: Text('Autenticação'),
                     ),
-                    text: "Atualizar imagem de perfil",
-                  ),
-                  LeftAlignTextButton(
-                    onPressed: () => showModalBottomSheet(
-                      context: context,
-                      builder: (context) => const UpdateEmailBottomSheet(),
-                    ),
-                    text: "Atualizar email",
-                  ),
-                  LeftAlignTextButton(
-                      onPressed: () => showModalBottomSheet(
-                            context: context,
-                            builder: (context) =>
-                                const UpdatePasswordBottomSheet(),
-                          ),
-                      text: "Alterar senha"),
-                  const LogoutButton(),
-                ],
+                    AuthenticationMenuCard(),
+                  ],
+                ),
               ),
             ),
     );
