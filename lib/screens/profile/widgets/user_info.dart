@@ -12,30 +12,32 @@ class UserInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     Auth auth = Provider.of<MainStore>(context).auth;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: Observer(
-        builder: (context) => auth.isLoading
-            ? const Center(child: CircularProgressIndicator())
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const UserProfileImage(radius: 32),
-                  const SizedBox(width: 8),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        auth.user?.displayName ?? '',
-                        style: const TextStyle(fontSize: 20),
-                      ),
-                      Text(auth.user?.email ?? ''),
-                    ],
-                  ),
-                ],
+    return Observer(
+      builder: (context) => auth.isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const UserProfileImage(radius: 36),
+                    const SizedBox(width: 8),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          auth.user?.displayName ?? '',
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                        Text(auth.user?.email ?? ''),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-      ),
+            ),
     );
   }
 }
