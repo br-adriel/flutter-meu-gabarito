@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meu_gabarito/classes/gabarito.dart';
@@ -24,6 +26,9 @@ abstract class GabaritosBase with Store {
 
   @readonly
   bool _isSaving = false;
+
+  @readonly
+  Gabarito? _gabarito;
 
   @readonly
   ObservableList<Gabarito> _gabaritos = ObservableList.of([]);
@@ -133,6 +138,41 @@ abstract class GabaritosBase with Store {
       }
     } catch (e) {
       _errors.add("Não foi possível recuperar os gabaritos");
+      rethrow;
+    } finally {
+      _isLoading = false;
+    }
+  }
+
+  @action
+  List<StreamSubscription> getGabarito(
+    String id,
+  ) {
+    _isLoading = true;
+    _errors.clear();
+
+    try {
+      final gabaritoListener =
+          _collectionRef.doc(id).snapshots().listen((event) {
+        _gabarito = Gabarito.fromFirestore(event, null);
+      });
+
+      final questoesListener = _collectionRef
+          .doc(id)
+          .collection('questoes')
+          .orderBy('numero', descending: false)
+          .snapshots()
+          .listen((event) {
+        final fetched =
+            event.docs.map((doc) => Questao.fromFirestore(doc, null));
+        _questoes.clear();
+        _questoes.addAll(fetched);
+      });
+
+      _isLoading = false;
+      return [questoesListener, gabaritoListener];
+    } catch (e) {
+      _errors.add("Não foi possível recuperar as questões");
       rethrow;
     } finally {
       _isLoading = false;

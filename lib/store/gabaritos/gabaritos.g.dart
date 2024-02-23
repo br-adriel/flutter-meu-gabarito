@@ -63,6 +63,24 @@ mixin _$Gabaritos on GabaritosBase, Store {
     });
   }
 
+  late final _$_gabaritoAtom =
+      Atom(name: 'GabaritosBase._gabarito', context: context);
+
+  Gabarito? get gabarito {
+    _$_gabaritoAtom.reportRead();
+    return super._gabarito;
+  }
+
+  @override
+  Gabarito? get _gabarito => gabarito;
+
+  @override
+  set _gabarito(Gabarito? value) {
+    _$_gabaritoAtom.reportWrite(value, super._gabarito, () {
+      super._gabarito = value;
+    });
+  }
+
   late final _$_gabaritosAtom =
       Atom(name: 'GabaritosBase._gabaritos', context: context);
 
@@ -142,6 +160,20 @@ mixin _$Gabaritos on GabaritosBase, Store {
   Future<void> getNextPage({bool isFirstPage = false, int pageSize = 10}) {
     return _$getNextPageAsyncAction.run(
         () => super.getNextPage(isFirstPage: isFirstPage, pageSize: pageSize));
+  }
+
+  late final _$GabaritosBaseActionController =
+      ActionController(name: 'GabaritosBase', context: context);
+
+  @override
+  List<StreamSubscription<dynamic>> getGabarito(String id) {
+    final _$actionInfo = _$GabaritosBaseActionController.startAction(
+        name: 'GabaritosBase.getGabarito');
+    try {
+      return super.getGabarito(id);
+    } finally {
+      _$GabaritosBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
