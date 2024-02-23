@@ -11,9 +11,7 @@ class LeftAlignTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      style: textButtonStyle.copyWith(
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      ),
+      style: cardMenuButtonStyle,
       onPressed: onPressed,
       child: Align(
         alignment: Alignment.centerLeft,
