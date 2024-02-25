@@ -61,8 +61,8 @@ abstract class GabaritosBase with Store {
 
       var gabaritoRef = await _collectionRef.add(gabarito.toFirestore());
 
-      for (int i = indice; i <= tamanho; i++) {
-        questao.numero = i;
+      for (int i = 0; i < tamanho; i++) {
+        questao.numero = indice + i;
         await gabaritoRef.collection('questoes').add(questao.toFirestore());
       }
     } catch (e) {
