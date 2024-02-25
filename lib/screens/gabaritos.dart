@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:meu_gabarito/screens/gabarito.dart';
 import 'package:meu_gabarito/store/gabaritos/gabaritos.dart';
 import 'package:meu_gabarito/store/main.dart';
 import 'package:meu_gabarito/widgets/gabarito_card.dart';
@@ -39,7 +40,20 @@ class GabaritosScreen extends HookWidget {
                       child: Text('Nenhum gabarito encontrado'),
                     )
                   : Container(),
-              ...store.gabaritos.map((gab) => GabaritoCard(gab)),
+              ...store.gabaritos.map(
+                (gab) => GabaritoCard(
+                  gab,
+                  onTap: () => Navigator.of(context)
+                      .push(
+                        MaterialPageRoute(
+                          builder: (context) => GabaritoScreen(gabarito: gab),
+                        ),
+                      )
+                      .then(
+                        (_) => store.getNextPage(isFirstPage: true),
+                      ),
+                ),
+              ),
               const SizedBox(height: 24),
               store.isLoading
                   ? const Center(child: CircularProgressIndicator())
