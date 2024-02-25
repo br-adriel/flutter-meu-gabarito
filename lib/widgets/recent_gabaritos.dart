@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:meu_gabarito/screens/gabarito.dart';
 import 'package:meu_gabarito/screens/gabaritos.dart';
 import 'package:meu_gabarito/store/gabaritos/gabaritos.dart';
 import 'package:meu_gabarito/store/main.dart';
@@ -12,8 +13,11 @@ class RecentGabaritos extends HookWidget {
   final int limit;
   final EdgeInsetsGeometry padding;
 
-  const RecentGabaritos(
-      {super.key, this.limit = 3, this.padding = const EdgeInsets.all(0)});
+  const RecentGabaritos({
+    super.key,
+    this.limit = 3,
+    this.padding = const EdgeInsets.all(0),
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +59,31 @@ class RecentGabaritos extends HookWidget {
                 padding: EdgeInsets.symmetric(vertical: 20),
                 child: Center(child: CircularProgressIndicator()),
               );
+            } else if (store.gabaritos.isEmpty) {
+              return const Padding(
+                padding: EdgeInsets.symmetric(vertical: 32),
+                child: Center(
+                  child: Text('Nenhum gabarito encontrado'),
+                ),
+              );
             } else {
               return Column(
                 children: store.gabaritos
-                    .map<Widget>((gab) => GabaritoCard(gab))
+                    .map<Widget>(
+                      (gab) => GabaritoCard(
+                        gab,
+                        onTap: () => Navigator.of(context)
+                            .push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    GabaritoScreen(gabarito: gab),
+                              ),
+                            )
+                            .then(
+                              (_) => store.getRecentGabaritos(limit: limit),
+                            ),
+                      ),
+                    )
                     .toList(),
               );
             }
