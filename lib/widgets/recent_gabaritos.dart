@@ -76,7 +76,7 @@ class RecentGabaritos extends HookWidget {
                             .push(
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    GabaritoScreen(gabarito: gab),
+                                    GabaritoScreen(id: gab.id!),
                               ),
                             )
                             .then(

@@ -46,7 +46,7 @@ class GabaritosScreen extends HookWidget {
                   onTap: () => Navigator.of(context)
                       .push(
                         MaterialPageRoute(
-                          builder: (context) => GabaritoScreen(gabarito: gab),
+                          builder: (context) => GabaritoScreen(id: gab.id!),
                         ),
                       )
                       .then(
