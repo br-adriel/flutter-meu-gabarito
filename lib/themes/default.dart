@@ -27,4 +27,9 @@ ThemeData defaultTheme = ThemeData(
   floatingActionButtonTheme: floatingButtonThemeData,
   inputDecorationTheme: inputDecorationTheme,
   bottomSheetTheme: bottomSheetThemeData,
+  dialogTheme: DialogTheme(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8),
+    ),
+  ),
 );
