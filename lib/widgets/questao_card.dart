@@ -23,7 +23,7 @@ class QuestaoCard extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Questao ${questao.numero.toString()}',
+                'Questão ${questao.numero.toString()}',
                 style: title2TextStyle,
               ),
             ),
