@@ -44,7 +44,7 @@ class GabaritoScreen extends HookWidget {
                     taxaCorrecao: gabarito.porcentagemCorrigidas,
                   ),
                   const SizedBox(height: 12),
-                  const GabaritoActions(),
+                  GabaritoActions(gabarito),
                   const SizedBox(height: 12),
                   ...store.questoes.map((q) => QuestaoCard(q)),
                 ],
