@@ -178,4 +178,25 @@ abstract class GabaritosBase with Store {
       _isLoading = false;
     }
   }
+
+  @action
+  Future<void> deleteGabarito(String id) async {
+    _isLoading = true;
+    _errors.clear();
+    try {
+      _collectionRef.doc(id).collection('questoes').get().then((snapshots) {
+        snapshots.docs.map((element) {
+          element.reference.delete();
+        });
+      });
+
+      await _collectionRef.doc(id).delete();
+      _gabaritos.clear();
+    } catch (e) {
+      _errors.add('Não foi possível apagar o gabarito');
+      rethrow;
+    } finally {
+      _isLoading = false;
+    }
+  }
 }

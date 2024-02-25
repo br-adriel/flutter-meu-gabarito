@@ -162,6 +162,14 @@ mixin _$Gabaritos on GabaritosBase, Store {
         () => super.getNextPage(isFirstPage: isFirstPage, pageSize: pageSize));
   }
 
+  late final _$deleteGabaritoAsyncAction =
+      AsyncAction('GabaritosBase.deleteGabarito', context: context);
+
+  @override
+  Future<void> deleteGabarito(String id) {
+    return _$deleteGabaritoAsyncAction.run(() => super.deleteGabarito(id));
+  }
+
   late final _$GabaritosBaseActionController =
       ActionController(name: 'GabaritosBase', context: context);
 
