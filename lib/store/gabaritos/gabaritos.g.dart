@@ -170,6 +170,15 @@ mixin _$Gabaritos on GabaritosBase, Store {
     return _$deleteGabaritoAsyncAction.run(() => super.deleteGabarito(id));
   }
 
+  late final _$renameGabaritoAsyncAction =
+      AsyncAction('GabaritosBase.renameGabarito', context: context);
+
+  @override
+  Future<void> renameGabarito(String id, String name) {
+    return _$renameGabaritoAsyncAction
+        .run(() => super.renameGabarito(id, name));
+  }
+
   late final _$GabaritosBaseActionController =
       ActionController(name: 'GabaritosBase', context: context);
 

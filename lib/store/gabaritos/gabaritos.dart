@@ -199,4 +199,18 @@ abstract class GabaritosBase with Store {
       _isLoading = false;
     }
   }
+
+  @action
+  Future<void> renameGabarito(String id, String name) async {
+    _isLoading = true;
+    _errors.clear();
+    try {
+      await _collectionRef.doc(id).update({'nome': name});
+    } catch (e) {
+      _errors.add('Não foi possível renomar o gabarito');
+      rethrow;
+    } finally {
+      _isLoading = false;
+    }
+  }
 }
