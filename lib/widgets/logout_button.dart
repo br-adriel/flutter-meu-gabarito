@@ -25,6 +25,7 @@ class LogoutButton extends StatelessWidget {
                 child: const Text("Cancelar"),
               ),
               FilledButton(
+                  style: deleteFilledButtonStyle,
                   onPressed: () {
                     auth.logout();
                     Navigator.of(context).pushAndRemoveUntil(
