@@ -4,6 +4,7 @@ String? validateSize(String? value) {
   int? parsedValue = int.tryParse(value);
   if (parsedValue == null) return 'Preencha o campo com um número válido';
   if (parsedValue <= 0) return 'O campo deve ser um valor maior que zero';
+  if (parsedValue > 500) return 'O campo deve ser um valor até 500';
 
   return null;
 }
