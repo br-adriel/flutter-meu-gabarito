@@ -65,3 +65,7 @@ const cardMenuButtonStyle = ButtonStyle(
     ),
   ),
 );
+
+var deleteFilledButtonStyle = ButtonStyle(
+  backgroundColor: MaterialStatePropertyAll(Colors.red[700]),
+);
