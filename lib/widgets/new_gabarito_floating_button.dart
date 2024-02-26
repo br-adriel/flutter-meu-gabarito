@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:meu_gabarito/screens/create_gabarito.dart';
 
-class NewTestTemplateFloatingButton extends StatelessWidget {
-  const NewTestTemplateFloatingButton({super.key});
+class NewGabaritoFloatingButton extends StatelessWidget {
+  const NewGabaritoFloatingButton({super.key});
 
   @override
   Widget build(BuildContext context) {
