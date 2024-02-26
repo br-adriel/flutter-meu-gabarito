@@ -38,18 +38,18 @@ class GabaritoScreen extends HookWidget {
             )
           : Scaffold(
               appBar: LogoAppBar(
-                title: store.gabarito!.nome!,
+                title: store.gabarito?.nome ?? '',
                 centerTitle: true,
               ),
               body: ListView(
                 padding: const EdgeInsets.fromLTRB(8, 0, 8, 16),
                 children: [
                   GabaritoStats(
-                    tamanho: store.gabarito!.tamanho!,
-                    acertos: store.gabarito!.contagemCorretas!,
-                    corrigidas: store.gabarito!.contagemCorrigidas!,
-                    taxaAcerto: store.gabarito!.porcentagemCorretas,
-                    taxaCorrecao: store.gabarito!.porcentagemCorrigidas,
+                    tamanho: store.gabarito?.tamanho ?? 0,
+                    acertos: store.gabarito?.contagemCorretas ?? 0,
+                    corrigidas: store.gabarito?.contagemCorrigidas ?? 0,
+                    taxaAcerto: store.gabarito?.porcentagemCorretas ?? 0.0,
+                    taxaCorrecao: store.gabarito?.porcentagemCorrigidas ?? 0.0,
                   ),
                   const SizedBox(height: 12),
                   GabaritoActions(store.gabarito!),
