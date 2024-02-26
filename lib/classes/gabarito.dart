@@ -47,8 +47,8 @@ class Gabarito {
       contagemCorretas: data?['contagemCorretas'],
       contagemCorrigidas: data?['contagemCorrigidas'],
       tamanho: data?['tamanho'],
-      createdAt: data?['createdAt'].toDate(),
-      updatedAt: data?['updatedAt'].toDate(),
+      createdAt: data?['createdAt']?.toDate(),
+      updatedAt: data?['updatedAt']?.toDate(),
     );
   }
 
