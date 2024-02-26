@@ -23,18 +23,25 @@ class Questao {
     final data = snapshot.data();
     return Questao(
       id: snapshot.id,
-      alternativaSelecionada: data?['alternativaSelecionada'],
+      alternativaSelecionada: data?['alternativaSelecionada'] != null
+          ? Alternativa.values.byName(data?['alternativaSelecionada'])
+          : null,
       corrigida: data?['corrigida'],
       numero: data?['numero'],
-      alternativaCorreta: data?['alternativaCorreta'],
+      alternativaCorreta: data?['alternativaCorreta'] != null
+          ? Alternativa.values.byName(data?['alternativaCorreta'])
+          : null,
     );
   }
 
   Map<String, dynamic> toFirestore() {
     return {
-      if (alternativaCorreta != null) 'alternativaCorreta': alternativaCorreta,
+      if (alternativaCorreta != null)
+        'alternativaCorreta':
+            Alternativa.values[alternativaCorreta!.index].name,
       if (alternativaSelecionada != null)
-        'alternativaSelecionada': alternativaSelecionada,
+        'alternativaSelecionada':
+            Alternativa.values[alternativaSelecionada!.index].name,
       if (corrigida != null) 'corrigida': corrigida,
       if (numero != null) 'numero': numero,
     };
