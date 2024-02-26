@@ -39,7 +39,7 @@ class GabaritoActions extends HookWidget {
     Gabaritos store = Provider.of<MainStore>(context).gabaritos;
 
     useEffect(() {
-      renameTC.text = gabarito.nome!;
+      renameTC.text = gabarito.nome ?? '';
       return null;
     });
 
