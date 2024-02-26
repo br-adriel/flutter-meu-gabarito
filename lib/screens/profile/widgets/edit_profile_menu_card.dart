@@ -15,7 +15,7 @@ class EditProfileMenuCard extends StatelessWidget {
             onPressed: () => showModalBottomSheet<dynamic>(
               isScrollControlled: true,
               context: context,
-              builder: (context) => const UpdateUserNameBottomSheet(),
+              builder: (context) => UpdateUserNameBottomSheet(),
             ),
             text: "Alterar nome",
           ),

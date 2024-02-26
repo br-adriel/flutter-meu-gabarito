@@ -6,15 +6,14 @@ import 'package:meu_gabarito/themes/styles/textfield_styles.dart';
 import 'package:provider/provider.dart';
 
 class UpdateUserNameBottomSheet extends StatelessWidget {
-  const UpdateUserNameBottomSheet({super.key});
+  final textController = TextEditingController();
+
+  UpdateUserNameBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
     Auth auth = Provider.of<MainStore>(context).auth;
-    var textController =
-        TextEditingController(text: auth.user?.displayName ?? '');
-    textController.selection =
-        TextSelection.collapsed(offset: textController.text.length);
+    textController.text = auth.user?.displayName ?? '';
 
     return Padding(
       padding:
