@@ -184,11 +184,14 @@ abstract class GabaritosBase with Store {
     _isLoading = true;
     _errors.clear();
     try {
-      _collectionRef.doc(id).collection('questoes').get().then((snapshots) {
-        snapshots.docs.map((element) {
-          element.reference.delete();
-        });
-      });
+      for (var questao in _questoes.toList()) {
+        await _collectionRef
+            .doc(id)
+            .collection('questoes')
+            .doc(questao.id!)
+            .delete();
+      }
+      _questoes.clear();
 
       await _collectionRef.doc(id).delete();
       _gabaritos.clear();
