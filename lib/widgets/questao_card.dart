@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:meu_gabarito/classes/questao.dart';
 import 'package:meu_gabarito/enums/alternativa.dart';
-import 'package:meu_gabarito/themes/styles/colors.dart';
 import 'package:meu_gabarito/themes/styles/text_styles.dart';
+import 'package:meu_gabarito/widgets/alternativa_button.dart';
 
 class QuestaoCard extends StatelessWidget {
   final Questao questao;
@@ -35,16 +35,10 @@ class QuestaoCard extends StatelessWidget {
                 (alternativa) => Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4),
-                    child: FilledButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(
-                          questAlt != null && questAlt == alternativa
-                              ? primary
-                              : Colors.grey[600],
-                        ),
-                      ),
-                      child: Text(alternativa.name),
-                      onPressed: () {},
+                    child: AlternativaButton(
+                      alternative: alternativa,
+                      questionId: questao.id!,
+                      selectedAlternative: questAlt,
                     ),
                   ),
                 ),
