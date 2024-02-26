@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:meu_gabarito/classes/gabarito.dart';
 import 'package:meu_gabarito/store/gabaritos/gabaritos.dart';
 import 'package:meu_gabarito/store/main.dart';
@@ -116,23 +117,36 @@ class GabaritoActions extends HookWidget {
             onPressed: () {
               showDialog(
                 context: context,
-                builder: (context) => AlertDialog(
-                  title: Text('Apagar gabarito "${gabarito.nome}"?'),
-                  content: const Text('Essa ação não pode ser desfeita'),
-                  actions: [
-                    cancelButton(context),
-                    FilledButton(
-                      onPressed: () {
-                        handlePromise(
-                          store.deleteGabarito(gabarito.id!),
-                          context,
-                          store,
-                        );
-                      },
-                      style: deleteFilledButtonStyle,
-                      child: const Text('Apagar'),
-                    ),
-                  ],
+                builder: (context) => Observer(
+                  builder: (context) => AlertDialog(
+                    title: store.isLoading
+                        ? const Text('Apagando gabarito...')
+                        : Text('Apagar gabarito "${gabarito.nome}"?'),
+                    content: store.isLoading
+                        ? const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircularProgressIndicator(),
+                            ],
+                          )
+                        : const Text('Essa ação não pode ser desfeita'),
+                    actions: store.isLoading
+                        ? null
+                        : [
+                            cancelButton(context),
+                            FilledButton(
+                              onPressed: () {
+                                handlePromise(
+                                  store.deleteGabarito(gabarito.id!),
+                                  context,
+                                  store,
+                                );
+                              },
+                              style: deleteFilledButtonStyle,
+                              child: const Text('Apagar'),
+                            ),
+                          ],
+                  ),
                 ),
               );
             },
