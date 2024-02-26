@@ -54,7 +54,7 @@ class _CreateGabaritoScreenState extends State<CreateGabaritoScreen> {
         bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: ListView(
           shrinkWrap: true,
           children: [
@@ -70,6 +70,7 @@ class _CreateGabaritoScreenState extends State<CreateGabaritoScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
+                          const SizedBox(height: 16),
                           Text(
                             'Criar gabarito',
                             style: titleTextStyle,
@@ -109,6 +110,7 @@ class _CreateGabaritoScreenState extends State<CreateGabaritoScreen> {
                             onPressed: submitForm,
                             child: const Text('Salvar'),
                           ),
+                          const SizedBox(height: 16),
                         ],
                       ),
                     ),
