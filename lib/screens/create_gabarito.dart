@@ -80,6 +80,7 @@ class _CreateGabaritoScreenState extends State<CreateGabaritoScreen> {
                             decoration: textFieldInputDecoration('Nome'),
                             textInputAction: TextInputAction.next,
                             validator: validateRequired,
+                            autofocus: true,
                           ),
                           const SizedBox(height: 8),
                           TextFormField(
