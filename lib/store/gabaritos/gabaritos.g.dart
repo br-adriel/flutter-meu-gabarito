@@ -179,6 +179,15 @@ mixin _$Gabaritos on GabaritosBase, Store {
         .run(() => super.renameGabarito(id, name));
   }
 
+  late final _$setAlternativaAsyncAction =
+      AsyncAction('GabaritosBase.setAlternativa', context: context);
+
+  @override
+  Future<void> setAlternativa(String questaoId, Alternativa alternativa) {
+    return _$setAlternativaAsyncAction
+        .run(() => super.setAlternativa(questaoId, alternativa));
+  }
+
   late final _$GabaritosBaseActionController =
       ActionController(name: 'GabaritosBase', context: context);
 

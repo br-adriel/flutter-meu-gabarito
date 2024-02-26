@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meu_gabarito/classes/gabarito.dart';
 import 'package:meu_gabarito/classes/questao.dart';
+import 'package:meu_gabarito/enums/alternativa.dart';
 import 'package:mobx/mobx.dart';
 
 part 'gabaritos.g.dart';
@@ -214,6 +215,28 @@ abstract class GabaritosBase with Store {
       rethrow;
     } finally {
       _isLoading = false;
+    }
+  }
+
+  @action
+  Future<void> setAlternativa(
+    String questaoId,
+    Alternativa alternativa,
+  ) async {
+    _errors.clear();
+    try {
+      if (_gabarito == null) throw Error();
+      await _collectionRef
+          .doc(_gabarito!.id)
+          .collection('questoes')
+          .doc(questaoId)
+          .update({'alternativaSelecionada': alternativa.name});
+      await _collectionRef.doc(_gabarito!.id).update({
+        'updatedAt': FieldValue.serverTimestamp(),
+      });
+    } catch (e) {
+      _errors.add('Não foi possível salvar a alteração');
+      rethrow;
     }
   }
 }
