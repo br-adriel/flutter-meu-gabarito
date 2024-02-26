@@ -31,35 +31,35 @@ class GabaritosScreen extends HookWidget {
       appBar: const LogoAppBar(title: 'Seus gabaritos', centerTitle: true),
       body: SafeArea(
         child: Observer(
-          builder: (context) => ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            controller: _scrollController,
-            children: [
-              store.gabaritos.isEmpty && !store.isLoading
-                  ? const Center(
-                      child: Text('Nenhum gabarito encontrado'),
-                    )
-                  : Container(),
-              ...store.gabaritos.map(
-                (gab) => GabaritoCard(
-                  gab,
-                  onTap: () => Navigator.of(context)
-                      .push(
-                        MaterialPageRoute(
-                          builder: (context) => GabaritoScreen(id: gab.id!),
-                        ),
-                      )
-                      .then(
-                        (_) => store.getNextPage(isFirstPage: true),
+          builder: (context) => store.gabaritos.isEmpty && !store.isLoading
+              ? const Center(
+                  child: Text('Nenhum gabarito encontrado'),
+                )
+              : ListView(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  controller: _scrollController,
+                  children: [
+                    ...store.gabaritos.map(
+                      (gab) => GabaritoCard(
+                        gab,
+                        onTap: () => Navigator.of(context)
+                            .push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    GabaritoScreen(id: gab.id!),
+                              ),
+                            )
+                            .then(
+                              (_) => store.getNextPage(isFirstPage: true),
+                            ),
                       ),
+                    ),
+                    const SizedBox(height: 24),
+                    store.isLoading
+                        ? const Center(child: CircularProgressIndicator())
+                        : Container(),
+                  ],
                 ),
-              ),
-              const SizedBox(height: 24),
-              store.isLoading
-                  ? const Center(child: CircularProgressIndicator())
-                  : Container(),
-            ],
-          ),
         ),
       ),
     );
