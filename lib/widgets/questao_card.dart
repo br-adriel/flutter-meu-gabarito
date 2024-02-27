@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meu_gabarito/classes/questao.dart';
-import 'package:meu_gabarito/enums/alternativa.dart';
 import 'package:meu_gabarito/themes/styles/text_styles.dart';
-import 'package:meu_gabarito/widgets/alternativa_button.dart';
+import 'package:meu_gabarito/widgets/questao_options.dart';
 
 class QuestaoCard extends StatelessWidget {
   final Questao questao;
@@ -11,8 +10,6 @@ class QuestaoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final questAlt = questao.alternativaSelecionada;
-
     return Card(
         child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
@@ -29,22 +26,9 @@ class QuestaoCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          Row(
-            children: [
-              ...Alternativa.values.map(
-                (alternativa) => Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    child: AlternativaButton(
-                      alternative: alternativa,
-                      questionId: questao.id!,
-                      selectedAlternative: questAlt,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+          questao.corrigida != null && questao.corrigida!
+              ? QuestaoOptions(questao)
+              : Container(),
         ],
       ),
     ));
