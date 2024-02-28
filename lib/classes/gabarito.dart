@@ -21,14 +21,14 @@ class Gabarito {
 
   double get porcentagemCorrigidas {
     if (contagemCorrigidas == null || tamanho == null || tamanho == 0) return 0;
-    return (contagemCorrigidas! ~/ tamanho!).toDouble();
+    return contagemCorrigidas! / tamanho!;
   }
 
   double get porcentagemCorretas {
     if (contagemCorretas == null ||
         contagemCorrigidas == null ||
         contagemCorrigidas == 0) return 0;
-    return (contagemCorretas! ~/ contagemCorrigidas!).toDouble();
+    return contagemCorretas! / contagemCorrigidas!;
   }
 
   bool get corrigido {
