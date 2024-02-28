@@ -239,4 +239,37 @@ abstract class GabaritosBase with Store {
       rethrow;
     }
   }
+
+  @action
+  Future<void> correctQuestao(
+    String questaoId,
+    Alternativa alternativaSelecionada,
+    Alternativa alternativaCorreta,
+  ) async {
+    _errors.clear();
+    try {
+      if (_gabarito == null) throw Error();
+      await _collectionRef
+          .doc(_gabarito!.id)
+          .collection('questoes')
+          .doc(questaoId)
+          .update({
+        'alternativaCorreta': alternativaCorreta.name,
+        'corrigida': true
+      });
+
+      Map<String, dynamic> updatedFields = {
+        'contagemCorrigidas': FieldValue.increment(1),
+        'updatedAt': FieldValue.serverTimestamp(),
+      };
+      if (alternativaSelecionada == alternativaCorreta) {
+        updatedFields['contagemCorretas'] = FieldValue.increment(1);
+      }
+
+      await _collectionRef.doc(_gabarito!.id).update(updatedFields);
+    } catch (e) {
+      _errors.add('Não foi possível salvar a alteração');
+      rethrow;
+    }
+  }
 }

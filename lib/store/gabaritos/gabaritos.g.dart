@@ -188,6 +188,16 @@ mixin _$Gabaritos on GabaritosBase, Store {
         .run(() => super.setAlternativa(questaoId, alternativa));
   }
 
+  late final _$correctQuestaoAsyncAction =
+      AsyncAction('GabaritosBase.correctQuestao', context: context);
+
+  @override
+  Future<void> correctQuestao(String questaoId,
+      Alternativa alternativaSelecionada, Alternativa alternativaCorreta) {
+    return _$correctQuestaoAsyncAction.run(() => super
+        .correctQuestao(questaoId, alternativaSelecionada, alternativaCorreta));
+  }
+
   late final _$GabaritosBaseActionController =
       ActionController(name: 'GabaritosBase', context: context);
 
