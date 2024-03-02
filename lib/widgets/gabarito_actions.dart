@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:meu_gabarito/classes/gabarito.dart';
 import 'package:meu_gabarito/store/gabaritos/gabaritos.dart';
 import 'package:meu_gabarito/store/main.dart';
 import 'package:meu_gabarito/themes/styles/button_styles.dart';
@@ -29,39 +28,52 @@ void handlePromise(Future<void> promise, BuildContext context, Gabaritos store,
 }
 
 class GabaritoActions extends HookWidget {
-  final Gabarito gabarito;
   final renameTC = TextEditingController();
 
-  GabaritoActions(this.gabarito, {super.key});
+  GabaritoActions({super.key});
 
   @override
   Widget build(BuildContext context) {
     Gabaritos store = Provider.of<MainStore>(context).gabaritos;
 
     useEffect(() {
-      renameTC.text = gabarito.nome ?? '';
+      renameTC.text = store.gabarito?.nome ?? '';
       return null;
     });
 
     return Row(
       children: [
-        Expanded(
-          child: FilledButton(
-            onPressed: () {},
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(Icons.check_box_outlined),
-                SizedBox(width: 4),
-                Text('Corrigir'),
-              ],
+        Observer(
+          builder: (context) => Expanded(
+            child: FilledButton(
+              onPressed: () {
+                if (store.isCorrectionModeEnabled) {
+                  store.disableCorrectionMode();
+                  return;
+                }
+                store.enableCorrectionMode();
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(store.isCorrectionModeEnabled
+                      ? Icons.list_alt_outlined
+                      : Icons.check_box_outlined),
+                  const SizedBox(width: 4),
+                  Text(
+                    store.isCorrectionModeEnabled ? 'Responder' : 'Corrigir',
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-        const SizedBox(width: 8),
-        Expanded(
+        const SizedBox(width: 4),
+        Tooltip(
+          message: 'Renomear',
           child: FilledButton(
+            style: filledButtonStyle,
             onPressed: () {
               showDialog(
                 context: context,
@@ -84,7 +96,8 @@ class GabaritoActions extends HookWidget {
                       onPressed: () {
                         if (validateRequired(renameTC.text) == null) {
                           handlePromise(
-                            store.renameGabarito(gabarito.id!, renameTC.text),
+                            store.renameGabarito(
+                                store.gabarito?.id ?? '-', renameTC.text),
                             context,
                             store,
                             popAmout: 1,
@@ -97,21 +110,14 @@ class GabaritoActions extends HookWidget {
                 ),
               );
             },
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(Icons.drive_file_rename_outline_outlined),
-                SizedBox(width: 4),
-                Text('Renomear'),
-              ],
-            ),
+            child: const Icon(Icons.drive_file_rename_outline_outlined),
           ),
         ),
-        const SizedBox(width: 8),
-        Expanded(
+        const SizedBox(width: 4),
+        Tooltip(
+          message: 'Apagar',
           child: FilledButton(
-            style: ButtonStyle(
+            style: filledButtonStyle.copyWith(
               backgroundColor: MaterialStatePropertyAll(Colors.red[700]),
             ),
             onPressed: () {
@@ -121,7 +127,8 @@ class GabaritoActions extends HookWidget {
                   builder: (context) => AlertDialog(
                     title: store.isLoading
                         ? const Text('Apagando gabarito...')
-                        : Text('Apagar gabarito "${gabarito.nome}"?'),
+                        : Text(
+                            'Apagar gabarito "${store.gabarito?.nome ?? ''}"?'),
                     content: store.isLoading
                         ? const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -137,7 +144,8 @@ class GabaritoActions extends HookWidget {
                             FilledButton(
                               onPressed: () {
                                 handlePromise(
-                                  store.deleteGabarito(gabarito.id!),
+                                  store.deleteGabarito(
+                                      store.gabarito?.id ?? '-'),
                                   context,
                                   store,
                                 );
@@ -150,15 +158,7 @@ class GabaritoActions extends HookWidget {
                 ),
               );
             },
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(Icons.delete_outline),
-                SizedBox(width: 4),
-                Text('Apagar'),
-              ],
-            ),
+            child: const Icon(Icons.delete_outline),
           ),
         ),
       ],
