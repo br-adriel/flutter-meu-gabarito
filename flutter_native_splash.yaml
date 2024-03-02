@@ -1,0 +1,17 @@
+flutter_native_splash:
+  # Customize the parameters below, and run the following command in the terminal:
+  # dart run flutter_native_splash:create
+  # To restore Flutter's default white splash screen, run the following command in the terminal:
+  # dart run flutter_native_splash:remove
+  color: '#0F7173'
+
+  # From Android 12 onwards, the splash screen is handled differently than in
+  # previous versions.
+  # Please visit https://developer.android.com/guide/topics/ui/splash-screen
+  # Following are specific parameters for Android 12+.
+  android_12:
+    color: '#0F7173'
+
+  # The android, ios and web parameters can be used to disable generating a
+  # splash screen on a given platform.
+  web: false
