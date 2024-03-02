@@ -248,6 +248,16 @@ abstract class GabaritosBase with Store {
   }
 
   @action
+  void enableCorrectionMode() {
+    _isCorrectionModeEnabled = true;
+  }
+
+  @action
+  void disableCorrectionMode() {
+    _isCorrectionModeEnabled = false;
+  }
+
+  @action
   Future<void> correctQuestao(
     String questaoId,
     Alternativa alternativaSelecionada,

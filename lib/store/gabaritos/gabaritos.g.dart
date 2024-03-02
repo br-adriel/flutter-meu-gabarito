@@ -232,6 +232,28 @@ mixin _$Gabaritos on GabaritosBase, Store {
   }
 
   @override
+  void enableCorrectionMode() {
+    final _$actionInfo = _$GabaritosBaseActionController.startAction(
+        name: 'GabaritosBase.enableCorrectionMode');
+    try {
+      return super.enableCorrectionMode();
+    } finally {
+      _$GabaritosBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void disableCorrectionMode() {
+    final _$actionInfo = _$GabaritosBaseActionController.startAction(
+        name: 'GabaritosBase.disableCorrectionMode');
+    try {
+      return super.disableCorrectionMode();
+    } finally {
+      _$GabaritosBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 
