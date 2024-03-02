@@ -12,10 +12,12 @@ part 'gabaritos.g.dart';
 class Gabaritos = GabaritosBase with _$Gabaritos;
 
 abstract class GabaritosBase with Store {
-  final _collectionRef = FirebaseFirestore.instance
-      .collection('users')
-      .doc(FirebaseAuth.instance.currentUser?.uid)
-      .collection('gabaritos');
+  CollectionReference<Map<String, dynamic>> _collectionRef() {
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .collection('gabaritos');
+  }
 
   DocumentSnapshot? _lastDoc;
 
@@ -63,7 +65,7 @@ abstract class GabaritosBase with Store {
         alternativaCorreta: null,
       );
 
-      var gabaritoRef = await _collectionRef.add(gabarito.toFirestore());
+      var gabaritoRef = await _collectionRef().add(gabarito.toFirestore());
 
       for (int i = 0; i < tamanho; i++) {
         questao.numero = indice + i;
@@ -83,7 +85,8 @@ abstract class GabaritosBase with Store {
     _errors.clear();
     _gabaritos.clear();
     try {
-      var collectionRef = _collectionRef.orderBy('updatedAt', descending: true);
+      var collectionRef =
+          _collectionRef().orderBy('updatedAt', descending: true);
 
       if (limit != null) collectionRef = collectionRef.limit(limit);
 
@@ -119,8 +122,9 @@ abstract class GabaritosBase with Store {
     try {
       if (_lastDoc == null) _gabaritos.clear();
 
-      var colRef =
-          _collectionRef.orderBy('updatedAt', descending: true).limit(pageSize);
+      var colRef = _collectionRef()
+          .orderBy('updatedAt', descending: true)
+          .limit(pageSize);
 
       if (_lastDoc != null) colRef = colRef.startAfterDocument(_lastDoc!);
 
@@ -157,11 +161,11 @@ abstract class GabaritosBase with Store {
 
     try {
       final gabaritoListener =
-          _collectionRef.doc(id).snapshots().listen((event) {
+          _collectionRef().doc(id).snapshots().listen((event) {
         _gabarito = Gabarito.fromFirestore(event, null);
       });
 
-      final questoesListener = _collectionRef
+      final questoesListener = _collectionRef()
           .doc(id)
           .collection('questoes')
           .orderBy('numero', descending: false)
@@ -189,7 +193,7 @@ abstract class GabaritosBase with Store {
     _errors.clear();
     try {
       for (var questao in _questoes.toList()) {
-        await _collectionRef
+        await _collectionRef()
             .doc(id)
             .collection('questoes')
             .doc(questao.id!)
@@ -197,7 +201,7 @@ abstract class GabaritosBase with Store {
       }
       _questoes.clear();
 
-      await _collectionRef.doc(id).delete();
+      await _collectionRef().doc(id).delete();
       _gabaritos.clear();
     } catch (e) {
       _errors.add('Não foi possível apagar o gabarito');
@@ -212,7 +216,7 @@ abstract class GabaritosBase with Store {
     _isLoading = true;
     _errors.clear();
     try {
-      await _collectionRef.doc(id).update({'nome': name});
+      await _collectionRef().doc(id).update({'nome': name});
     } catch (e) {
       _errors.add('Não foi possível renomar o gabarito');
       rethrow;
@@ -229,12 +233,12 @@ abstract class GabaritosBase with Store {
     _errors.clear();
     try {
       if (_gabarito == null) throw Error();
-      await _collectionRef
+      await _collectionRef()
           .doc(_gabarito!.id)
           .collection('questoes')
           .doc(questaoId)
           .update({'alternativaSelecionada': alternativa.name});
-      await _collectionRef.doc(_gabarito!.id).update({
+      await _collectionRef().doc(_gabarito!.id).update({
         'updatedAt': FieldValue.serverTimestamp(),
       });
     } catch (e) {
@@ -252,7 +256,7 @@ abstract class GabaritosBase with Store {
     _errors.clear();
     try {
       if (_gabarito == null) throw Error();
-      await _collectionRef
+      await _collectionRef()
           .doc(_gabarito!.id)
           .collection('questoes')
           .doc(questaoId)
@@ -269,7 +273,7 @@ abstract class GabaritosBase with Store {
         updatedFields['contagemCorretas'] = FieldValue.increment(1);
       }
 
-      await _collectionRef.doc(_gabarito!.id).update(updatedFields);
+      await _collectionRef().doc(_gabarito!.id).update(updatedFields);
     } catch (e) {
       _errors.add('Não foi possível salvar a alteração');
       rethrow;
