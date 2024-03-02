@@ -25,10 +25,8 @@ class Gabarito {
   }
 
   double get porcentagemCorretas {
-    if (contagemCorretas == null ||
-        contagemCorrigidas == null ||
-        contagemCorrigidas == 0) return 0;
-    return contagemCorretas! / contagemCorrigidas!;
+    if (contagemCorretas == null || tamanho == null || tamanho == 0) return 0;
+    return contagemCorretas! / tamanho!;
   }
 
   bool get corrigido {
