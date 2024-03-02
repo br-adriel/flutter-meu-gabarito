@@ -9,8 +9,8 @@ class QuestaoCorrigidaInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool correct =
-        questao.alternativaSelecionada! == questao.alternativaCorreta!;
+    bool correct = questao.alternativaSelecionada == questao.alternativaCorreta;
+
     return Row(
       children: [
         Expanded(
@@ -23,7 +23,7 @@ class QuestaoCorrigidaInfo extends StatelessWidget {
             ),
             onPressed: () {},
             child: Text(
-              Alternativa.values[questao.alternativaSelecionada!.index].name,
+              Alternativa.values[questao.alternativaCorreta!.index].name,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
