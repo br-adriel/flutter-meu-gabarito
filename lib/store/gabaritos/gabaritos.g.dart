@@ -81,6 +81,25 @@ mixin _$Gabaritos on GabaritosBase, Store {
     });
   }
 
+  late final _$_isCorrectionModeEnabledAtom =
+      Atom(name: 'GabaritosBase._isCorrectionModeEnabled', context: context);
+
+  bool get isCorrectionModeEnabled {
+    _$_isCorrectionModeEnabledAtom.reportRead();
+    return super._isCorrectionModeEnabled;
+  }
+
+  @override
+  bool get _isCorrectionModeEnabled => isCorrectionModeEnabled;
+
+  @override
+  set _isCorrectionModeEnabled(bool value) {
+    _$_isCorrectionModeEnabledAtom
+        .reportWrite(value, super._isCorrectionModeEnabled, () {
+      super._isCorrectionModeEnabled = value;
+    });
+  }
+
   late final _$_gabaritosAtom =
       Atom(name: 'GabaritosBase._gabaritos', context: context);
 

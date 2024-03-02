@@ -32,6 +32,9 @@ abstract class GabaritosBase with Store {
   Gabarito? _gabarito;
 
   @readonly
+  bool _isCorrectionModeEnabled = false;
+
+  @readonly
   ObservableList<Gabarito> _gabaritos = ObservableList.of([]);
 
   @readonly
