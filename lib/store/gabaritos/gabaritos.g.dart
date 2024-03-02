@@ -212,7 +212,7 @@ mixin _$Gabaritos on GabaritosBase, Store {
 
   @override
   Future<void> correctQuestao(String questaoId,
-      Alternativa alternativaSelecionada, Alternativa alternativaCorreta) {
+      Alternativa? alternativaSelecionada, Alternativa alternativaCorreta) {
     return _$correctQuestaoAsyncAction.run(() => super
         .correctQuestao(questaoId, alternativaSelecionada, alternativaCorreta));
   }

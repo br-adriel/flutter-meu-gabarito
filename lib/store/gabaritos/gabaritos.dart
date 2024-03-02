@@ -260,10 +260,15 @@ abstract class GabaritosBase with Store {
   @action
   Future<void> correctQuestao(
     String questaoId,
-    Alternativa alternativaSelecionada,
+    Alternativa? alternativaSelecionada,
     Alternativa alternativaCorreta,
   ) async {
     _errors.clear();
+    if (!_isCorrectionModeEnabled) {
+      _errors.add('Modo de correção desativado');
+      return;
+    }
+
     try {
       if (_gabarito == null) throw Error();
       await _collectionRef()
