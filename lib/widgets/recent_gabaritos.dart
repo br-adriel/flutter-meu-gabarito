@@ -10,12 +10,10 @@ import 'package:meu_gabarito/widgets/gabarito_card.dart';
 import 'package:provider/provider.dart';
 
 class RecentGabaritos extends HookWidget {
-  final int limit;
   final EdgeInsetsGeometry padding;
 
   const RecentGabaritos({
     super.key,
-    this.limit = 3,
     this.padding = const EdgeInsets.all(0),
   });
 
@@ -24,7 +22,7 @@ class RecentGabaritos extends HookWidget {
     Gabaritos store = Provider.of<MainStore>(context).gabaritos;
 
     useEffect(() {
-      store.getRecentGabaritos(limit: limit);
+      store.getRecentGabaritos();
       return () {};
     }, []);
 
@@ -45,7 +43,7 @@ class RecentGabaritos extends HookWidget {
                         builder: (context) => GabaritosScreen(),
                       ),
                     )
-                    .then((value) => store.getRecentGabaritos()),
+                    .whenComplete(store.getRecentGabaritos),
                 child: const Text(
                   'Ver todos',
                   style: TextStyle(fontSize: 16),
@@ -79,9 +77,7 @@ class RecentGabaritos extends HookWidget {
                                     GabaritoScreen(id: gab.id!),
                               ),
                             )
-                            .then(
-                              (_) => store.getRecentGabaritos(limit: limit),
-                            ),
+                            .whenComplete(store.getRecentGabaritos),
                       ),
                     )
                     .toList(),
