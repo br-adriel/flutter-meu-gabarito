@@ -8,6 +8,8 @@ com Django](https://github.com/br-adriel/meuGabarito).
 ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
 ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
 
+![capa](https://github.com/br-adriel/flutter-meu-gabarito/assets/49590887/a7e12e90-8956-4f09-8c83-b32c3516a2e3)
+
 ## Motivação
 
 Quando eu estava estudando para o ENEM em 2020, eu costumava resolver as
