@@ -23,7 +23,10 @@ class QuestaoCorrigidaInfo extends StatelessWidget {
             ),
             onPressed: () {},
             child: Text(
-              Alternativa.values[questao.alternativaCorreta!.index].name,
+              questao.alternativaSelecionada == null
+                  ? '-'
+                  : Alternativa
+                      .values[questao.alternativaSelecionada!.index].name,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
