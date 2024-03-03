@@ -80,15 +80,13 @@ abstract class GabaritosBase with Store {
   }
 
   @action
-  Future<void> getRecentGabaritos({int? limit}) async {
+  Future<void> getRecentGabaritos({int limit = 3}) async {
     _isLoading = true;
     _errors.clear();
     _gabaritos.clear();
     try {
       var collectionRef =
-          _collectionRef().orderBy('updatedAt', descending: true);
-
-      if (limit != null) collectionRef = collectionRef.limit(limit);
+          _collectionRef().orderBy('updatedAt', descending: true).limit(limit);
 
       final docsSnap = await collectionRef
           .withConverter(

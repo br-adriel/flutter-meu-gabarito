@@ -167,7 +167,7 @@ mixin _$Gabaritos on GabaritosBase, Store {
       AsyncAction('GabaritosBase.getRecentGabaritos', context: context);
 
   @override
-  Future<void> getRecentGabaritos({int? limit}) {
+  Future<void> getRecentGabaritos({int limit = 3}) {
     return _$getRecentGabaritosAsyncAction
         .run(() => super.getRecentGabaritos(limit: limit));
   }
